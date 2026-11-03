@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.airguard.ai.ui.dashboard.DashboardFragment"
+        android:label="Dashboard" />
+
+    <fragment
+        android:id="@+id/readingsFragment"
+        android:name="com.airguard.ai.ui.readings.ReadingsFragment"
+        android:label="Readings" />
+
+    <fragment
+        android:id="@+id/analysisFragment"
+        android:name="com.airguard.ai.ui.analysis.AnalysisFragment"
+        android:label="Analysis" />
+
+    <fragment
+        android:id="@+id/modelFragment"
+        android:name="com.airguard.ai.ui.model.ModelFragment"
+        android:label="Model Info" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.airguard.ai.ui.settings.SettingsFragment"
+        android:label="Settings" />
+
+</navigation>

@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header Card with Gradient -->
+        <RelativeLayout
+            android:id="@+id/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gradient_header"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="48dp"
+            android:paddingBottom="28dp">
+
+            <!-- App Title -->
+            <TextView
+                android:id="@+id/tv_app_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AirGuard AI"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                android:alpha="0.8" />
+
+            <!-- Main AQI Display -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/tv_app_title"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Indoor Air Quality"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Research Laboratory"
+                        android:textColor="#CCE0FF"
+                        android:textSize="13sp"
+                        android:layout_marginTop="2dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="8dp">
+
+                        <View
+                            android:id="@+id/status_dot"
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="#4CAF50"
+                            android:layout_marginEnd="6dp" />
+
+                        <TextView
+                            android:id="@+id/tv_connectivity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Connected"
+                            android:textColor="#CCFFFFFF"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  •  "
+                            android:textColor="#CCFFFFFF"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_last_sync"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Synced: --"
+                            android:textColor="#CCFFFFFF"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- AQI Circle -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_aqi_value"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:gravity="center"
+                        android:text="--"
+                        android:textColor="#FFFFFF"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/bg_aqi_circle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AQI"
+                        android:textColor="#CCFFFFFF"
+                        android:textSize="11sp"
+                        android:gravity="center"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Risk Badge -->
+            <LinearLayout
+                android:id="@+id/risk_badge_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_app_title"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_risk_badge_white"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp">
+
+                <View
+                    android:id="@+id/risk_indicator_dot"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/bg_circle_green"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_risk_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Risk: Good"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- Outdated Data Warning Banner -->
+        <LinearLayout
+            android:id="@+id/banner_outdated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#FFF3E0"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="⚠ Data may be outdated. Last sync more than 1 hour ago."
+                android:textColor="#E65100"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btn_sync_banner"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sync"
+                android:textColor="@color/primary" />
+        </LinearLayout>
+
+        <!-- Sensor Grid -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp">
+
+            <!-- Section Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_section_header"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Sensor Readings"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_readings_timestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Row 1: Temp + Humidity -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <!-- Temperature Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp"
+                        android:background="#FFF8F0">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🌡️"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:id="@+id/tv_temp_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="--"
+                            android:textColor="@color/text_primary"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Temperature"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Humidity Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp"
+                        android:background="#F0F8FF">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="💧"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:id="@+id/tv_humidity_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="--"
+                            android:textColor="@color/text_primary"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Humidity"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- Row 2: Pressure + Gas -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <!-- Pressure Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp"
+                        android:background="#F8F0FF">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🌬️"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:id="@+id/tv_pressure_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="--"
+                            android:textColor="@color/text_primary"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pressure (hPa)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Gas Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp"
+                        android:background="#F0FFF8">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="💨"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:id="@+id/tv_gas_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="--"
+                            android:textColor="@color/text_primary"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gas Resistance (kΩ)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- Row 3: Dew Point + Heat Index -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <!-- Dew Point Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp"
+                        android:background="#F0FFFF">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🌫️"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:id="@+id/tv_dewpoint_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="--"
+                            android:textColor="@color/text_primary"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dew Point (°C)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Heat Index Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp"
+                        android:background="#FFF0F0">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🔥"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:id="@+id/tv_heatindex_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="--"
+                            android:textColor="@color/text_primary"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Heat Index (°C)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- ML Prediction Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_section_header"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AI Risk Assessment"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_prediction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/surface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_prediction_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Current Risk Level"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tv_prediction_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Calculating..."
+                                android:textColor="@color/text_primary"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="2dp" />
+
+                            <TextView
+                                android:id="@+id/tv_prediction_confidence"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Confidence: --"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/prediction_icon_container"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:gravity="center"
+                            android:background="@drawable/bg_prediction_circle">
+
+                            <TextView
+                                android:id="@+id/tv_prediction_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="🛡️"
+                                android:textSize="26sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_prediction_explanation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Run a sync to get the latest prediction."
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        android:lineSpacingMultiplier="1.4" />
+
+                    <TextView
+                        android:id="@+id/tv_model_tag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="On-device ML • Random Forest"
+                        android:textColor="@color/primary"
+                        android:textSize="11sp"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Recent Trend Chart -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_section_header"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24-Hour AQI Trend"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/surface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart_trend"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp" />
+
+                    <Button
+                        android:id="@+id/btn_sync"
+                        style="@style/Widget.Material3.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="🔄  Sync Latest Data"
+                        android:textSize="14sp"
+                        android:layout_marginTop="12dp"
+                        android:backgroundTint="@color/primary" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

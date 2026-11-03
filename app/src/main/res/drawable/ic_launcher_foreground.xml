@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Shield background -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,18 L78,28 L78,52 C78,66 68,76 54,82 C40,76 30,66 30,52 L30,28 Z" />
+    <!-- Air wave lines -->
+    <path
+        android:fillColor="#1565C0"
+        android:strokeColor="#1565C0"
+        android:strokeWidth="2"
+        android:pathData="M44,45 Q54,40 64,45" />
+    <path
+        android:fillColor="#1565C0"
+        android:strokeColor="#00ACC1"
+        android:strokeWidth="2"
+        android:pathData="M40,52 Q54,46 68,52" />
+    <path
+        android:fillColor="#1565C0"
+        android:strokeColor="#29B6F6"
+        android:strokeWidth="2"
+        android:pathData="M44,59 Q54,54 64,59" />
+    <!-- Checkmark -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M46,55 L52,61 L64,47 L62,45 L52,57 L48,53 Z" />
+</vector>
