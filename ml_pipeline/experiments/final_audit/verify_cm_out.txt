@@ -1,0 +1,20 @@
+Confusion matrix (from saved CSV):
+                     GOOD  MODERATE  UNHEALTHY_SENSITIVE  UNHEALTHY  VERY_UNHEALTHY  HAZARDOUS
+GOOD                    8         0                    0          0               0          0
+MODERATE                0        60                    0         62               0          0
+UNHEALTHY_SENSITIVE     1         0                   10          0               0          0
+UNHEALTHY               0         0                    0        608               8          0
+VERY_UNHEALTHY          0         0                    3          0              22          0
+HAZARDOUS               0         0                    0          0               0          0
+
+Per-class metrics derived from confusion matrix:
+Class                           TP    FP    FN     Prec   Recall       F1   Supp
+---------------------------------------------------------------------------
+GOOD                             8     1     0   0.8889   1.0000   0.9412      8
+MODERATE                        60     0    62   1.0000   0.4918   0.6593    122
+UNHEALTHY_SENSITIVE             10     3     1   0.7692   0.9091   0.8333     11
+UNHEALTHY                      608    62     8   0.9075   0.9870   0.9456    616
+VERY_UNHEALTHY                  22     8     3   0.7333   0.8800   0.8000     25
+HAZARDOUS                        0     0     0   0.0000   0.0000   0.0000      0
+
+Overall accuracy: 708/782 = 0.905371 (90.5371%)

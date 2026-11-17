@@ -1,0 +1,178 @@
+=================================================================
+  AirGuard AI — ML Training Pipeline
+=================================================================
+
+[1] Loading CSV: C:\Users\ADMIN\Downloads\AeroSense Device 2 - Sheet1 (1).csv
+    Raw shape : 19896 rows × 10 columns
+    Columns   : ['Date', 'Time', 'Temperature(°C)', 'Humidity(%)', 'Pressure(hPa)', 'AQI', 'Gas (kOhms)', 'Altitude(m)', 'DewPoint(°C)', 'HeatIndex(°C)']
+
+[2] All required columns present [OK]
+
+[3] Cleaning data …
+    Duplicate rows removed                 : 2
+    Rows dropped (NaN in features or AQI) : 0
+    Rows remaining after cleaning         : 19894
+
+[4] Deriving RiskLevel labels from AQI …
+    (AQI is used only to build labels — it is excluded from features)
+    Disclaimer: labels reflect dataset AQI values, not EPA-verified AQI.
+
+    AQI statistics (label derivation reference only):
+      Min    : 10.00
+      Max    : 100.00
+      Mean   : 73.06
+      Median : 80.00
+      Std    : 11.85
+
+    Full class distribution (all cleaned rows):
+      GOOD                       :    146  (  0.7%)
+      MODERATE                   :    439  (  2.2%)
+      UNHEALTHY_SENSITIVE        :   5947  ( 29.9%)
+      UNHEALTHY                  :  13002  ( 65.4%)
+      VERY_UNHEALTHY             :      0  (  0.0%)  [!] ZERO SAMPLES
+      HAZARDOUS                  :    360  (  1.8%)
+
+    [!] WARNING: Classes with zero samples: ['VERY_UNHEALTHY']
+      These classes cannot be trained or evaluated.
+      This is a DATA LIMITATION of the AeroSense Device 2 dataset.
+
+[5] Chronological split …
+    Rows with date+time available  : 19790
+    Rows without date/time (NaN)   : 104
+    → Undated rows cannot be placed on the timeline.
+      They are excluded from training and testing.
+      This avoids contaminating the chronological order.
+    Rows usable for chronological split    : 19790
+
+    Timeline: 2025-07-26 13:38:48  →  2026-08-25 10:42:29
+    Train :  15832 rows  (2025-07-26 13:38:48  →  2026-05-01 04:03:03)
+    Test  :   3958 rows  (2026-05-01 04:03:09  →  2026-08-25 10:42:29)
+
+    Class distribution — Train split:
+      GOOD                       :    125
+      MODERATE                   :    406
+      UNHEALTHY_SENSITIVE        :   5833
+      UNHEALTHY                  :   9468
+      VERY_UNHEALTHY             :      0
+      HAZARDOUS                  :      0
+
+    Class distribution — Test split:
+      GOOD                       :     10
+      MODERATE                   :     16
+      UNHEALTHY_SENSITIVE        :     42
+      UNHEALTHY                  :   3530
+      VERY_UNHEALTHY             :      0
+      HAZARDOUS                  :    360
+
+[6] Feature matrix shapes:
+    X_train : (15832, 7)   y_train : (15832,)
+    X_test  : (3958, 7)    y_test  : (3958,)
+
+    Feature statistics (training set):
+       Temperature(°C)   Humidity(%)  Pressure(hPa)   Gas (kOhms)   Altitude(m)  DewPoint(°C)  HeatIndex(°C)
+count     15832.000000  15832.000000   15832.000000  15832.000000  15832.000000  15832.000000   15832.000000
+mean         31.973257     65.086022    1002.686104    230.157858     88.444277     24.965165      38.657504
+std           4.442556      7.323908       6.539399     73.168886     54.945912      4.964779       8.112691
+min          23.600000     38.800000     988.000000      9.800000    -14.300000     15.700000      24.400000
+25%          28.800000     61.700000     997.700000    167.200000     66.000000     20.900000      31.800000
+50%          32.000000     64.000000    1003.700000    231.300000     79.500000     25.500000      39.000000
+75%          35.500000     68.800000    1005.300000    295.500000    130.600000     29.400000      46.300000
+max          48.900000     87.100000    1015.000000    401.500000    212.600000     36.400000      56.700000
+
+[7] Training RandomForestClassifier …
+    Hyperparameters: {'n_estimators': 200, 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'class_weight': 'balanced', 'random_state': 42, 'n_jobs': -1}
+    Training complete [OK]
+
+[8] Evaluation on test set (chronologically unseen data):
+
+    Accuracy          : 0.8765  (87.65%)
+    Macro Precision   : 0.5624
+    Macro Recall      : 0.6837
+    Macro F1-score    : 0.5642
+
+    Majority-class baseline:
+      Majority class  : UNHEALTHY
+      Baseline accuracy: 0.8919  (89.19%)
+      Model improvement over baseline: -1.54 percentage points
+
+    Per-class metrics (classification report):
+                     precision    recall  f1-score   support
+
+               GOOD       0.91      1.00      0.95        10
+          HAZARDOUS       0.00      0.00      0.00       360
+           MODERATE       0.80      0.50      0.62        16
+          UNHEALTHY       0.92      0.97      0.94      3530
+UNHEALTHY_SENSITIVE       0.19      0.95      0.31        42
+
+           accuracy                           0.88      3958
+          macro avg       0.56      0.68      0.56      3958
+       weighted avg       0.82      0.88      0.85      3958
+
+    Confusion matrix (rows = actual, cols = predicted):
+    Classes: [np.str_('GOOD'), np.str_('HAZARDOUS'), np.str_('MODERATE'), np.str_('UNHEALTHY'), np.str_('UNHEALTHY_SENSITIVE')]
+           GOOD  HAZARD  MODERA  UNHEAL  UNHEAL
+      GOOD      10       0       0       0       0
+    HAZARD       0       0       0     312      48
+    MODERA       1       0       8       0       7
+    UNHEAL       0       0       0    3411     119
+    UNHEAL       0       0       2       0      40
+
+[9] Feature importances (from trained forest):
+    Feature                     Importance
+    --------------------------  ----------
+    Gas (kOhms)                 0.627996  ███████████████████████████████
+    Temperature(°C)             0.079301  ███
+    Humidity(%)                 0.078561  ███
+    Altitude(m)                 0.061944  ███
+    Pressure(hPa)               0.053452  ██
+    DewPoint(°C)                0.053312  ██
+    HeatIndex(°C)               0.045433  ██
+
+    Saved to: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\feature_importances.csv
+
+[10] Saving model artifacts …
+    Model       : c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\airguard_model.pkl
+    Preprocessor: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\airguard_preprocessor.pkl
+    LabelEncoder: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\airguard_label_encoder.pkl
+
+=================================================================
+  SUMMARY
+=================================================================
+  Raw rows loaded            : 19896
+  Duplicate rows removed     : 2
+  NaN rows removed           : 0
+  Undated/unparseable rows   : 104
+  Rows used for modelling    : 19790
+  Training rows              : 15832
+  Test rows                  : 3958
+  Split type                 : CHRONOLOGICAL (80/19)
+  Features used              : 7 (AQI is NOT a feature)
+
+  Accuracy                   : 0.8765
+  Macro F1                   : 0.5642
+  Macro Precision            : 0.5624
+  Macro Recall               : 0.6837
+  Majority-class baseline    : 0.8919
+
+  Limitations:
+    - Classes never seen in data: ['VERY_UNHEALTHY']
+      Model cannot predict these classes.
+    - Labels are AQI-derived (dataset internal), not EPA-validated.
+    - Sensor data collected from one device in one location.
+    - Temporal generalization to new dates/environments not tested.
+    - StandardScaler parameters must ship alongside the model for
+      correct inference on new data.
+
+  Android integration suitability:
+    The .pkl files are NOT directly loadable on Android.
+    To deploy on Android you must either:
+      (a) Convert to ONNX via sklearn-onnx + use ONNX Runtime for Android, OR
+      (b) Re-implement the trained forest as hand-coded Kotlin decision trees
+          (matching the existing DecisionTree.kt pattern in the app), OR
+      (c) Call a hosted REST API serving the model.
+    The exported feature_importances.csv and classification metrics are
+    immediately usable in a research paper without any Android changes.
+
+=================================================================
+  Pipeline complete.
+=================================================================

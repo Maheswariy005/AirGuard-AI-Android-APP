@@ -1,0 +1,15 @@
+Vector index=1 true=MODERATE pred=MODERATE
+JSON proba (probabilities_by_encoded_int): {'GOOD': 0.03582313, 'HAZARDOUS': 0.0, 'MODERATE': 0.77742887, 'UNHEALTHY': 0.03853977, 'UNHEALTHY_SENSITIVE': 0.14820811}
+JSON proba (opset22 backup): {'GOOD': 0.035823, 'HAZARDOUS': 0.0, 'MODERATE': 0.777429, 'UNHEALTHY': 0.03854, 'UNHEALTHY_SENSITIVE': 0.148208}
+
+Class                        SK_f64  ORT17_f32       JSON
+GOOD                       0.035823   0.035823   0.035823
+HAZARDOUS                  0.000000   0.000000   0.000000
+MODERATE                   0.777429   0.777429   0.777429
+UNHEALTHY                  0.038540   0.038540   0.038540
+UNHEALTHY_SENSITIVE        0.148208   0.148208   0.148208
+
+Android reported GOOD prob: 0.030823
+JSON GOOD prob:             0.035823
+ORT17 GOOD prob:            0.035823
+Are JSON and ORT17 same? True

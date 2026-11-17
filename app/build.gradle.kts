@@ -52,8 +52,11 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.mpandroidchart)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.onnxruntime.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    // Gson available to instrumented tests via implementation dep — no duplicate needed
+    // ONNX Runtime available via implementation dep — no duplicate needed
 }

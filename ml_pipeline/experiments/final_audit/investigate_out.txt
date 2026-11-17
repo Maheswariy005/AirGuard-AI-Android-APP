@@ -1,0 +1,58 @@
+========================================================================
+ONNX MODEL INFO
+========================================================================
+  IR version  : 8
+  Opset map   : {'ai.onnx.ml': 1, '': 17}
+  Outputs     : [('label', 'tensor(int64)'), ('probabilities', 'tensor(float)')]
+
+========================================================================
+TASK 2: sklearn vs opset-17 ORT — 782 samples
+========================================================================
+  Label agreement (ort vs sklearn f64): 782/782
+  Label agreement (ort vs sklearn f32): 782/782
+
+  A. sklearn(f64) vs ORT(f32):
+     Max abs diff       : 4.172325e-07
+     Mean abs diff      : 5.272036e-08
+     Samples > 1e-3     : 0
+     Samples > 1e-2     : 0
+
+  B. sklearn(f32 input) vs ORT(f32) — isolates operator differences:
+     Max abs diff       : 4.172325e-07
+     Mean abs diff      : 5.272036e-08
+     Samples > 1e-3     : 0
+
+  C. sklearn f64->f32 conversion only (no ORT):
+     Max abs diff       : 0.000000e+00
+
+  Per-class max diff (A: sklearn f64 vs ORT f32):
+     class 0 (GOOD                    ): 2.384186e-07
+     class 1 (HAZARDOUS               ): 2.980232e-07
+     class 2 (MODERATE                ): 1.192093e-07
+     class 3 (UNHEALTHY               ): 4.172325e-07
+     class 4 (UNHEALTHY_SENSITIVE     ): 3.576279e-07
+
+  ORT probability sums (should be ~1.0):
+     Min: 0.99999958  Max: 1.00000000  Mean: 0.99999976
+
+========================================================================
+TASK 1: Detailed analysis on 48 test vectors
+========================================================================
+  Test vectors loaded: 48
+
+  Vectors where ANY probability diff > 1e-3:
+   Vec                      Class     SK_f64    ORT_f32       diff Source
+  ------------------------------------------------------------------------
+
+  Max absolute probability diff across all 48 vectors (all classes): 2.389748e-07
+  Mean absolute diff: 3.361420e-08
+  Diffs > 1e-3: 0
+  Diffs > 1e-2: 0
+
+========================================================================
+TASK 1C: Android vs Python ORT comparison
+========================================================================
+  Checking failing cases: test_vectors.json indices 1 and 5
+
+  Vector 153 (true=GOOD, pred=GOOD):
+  Class                     TV_json_proba    ORT17_f32       SK_f64

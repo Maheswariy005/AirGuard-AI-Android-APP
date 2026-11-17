@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import com.airguard.ai.data.RiskLevel
 import com.airguard.ai.data.SensorReading
 import com.airguard.ai.databinding.FragmentDashboardBinding
+import com.airguard.ai.ml.MlPredictionResult
 import com.airguard.ai.ml.PredictionResult
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
@@ -65,8 +66,17 @@ class DashboardFragment : Fragment() {
 
         viewModel.prediction.observe(viewLifecycleOwner) { prediction ->
             if (prediction != null) {
-                updatePredictionCard(prediction)
+                // Legacy classifier output — kept for feature contribution display only.
+                // User-facing classification now comes from the ONNX model below.
+                updateLegacyFeatureContributions(prediction)
             }
+        }
+
+        // Observe ML prediction (from OnnxClassifier via ViewModel)
+        // This is the user-facing AI Risk Assessment card.
+        viewModel.mlPrediction.observe(viewLifecycleOwner) { mlResult ->
+            updatePredictionCard(mlResult)
+            updateMlComparisonColumn(mlResult)
         }
 
         viewModel.syncState.observe(viewLifecycleOwner) { state ->
@@ -121,17 +131,33 @@ class DashboardFragment : Fragment() {
         } catch (_: Exception) {}
     }
 
-    private fun updatePredictionCard(prediction: PredictionResult) {
-        val risk = prediction.riskLevel
+    private fun updatePredictionCard(mlResult: MlPredictionResult?) {
+        if (mlResult == null) {
+            binding.tvPredictionValue.text = getString(com.airguard.ai.R.string.ml_loading)
+            binding.tvPredictionConfidence.text = "Confidence: --"
+            binding.tvPredictionIcon.text = "\u23F3"
+            binding.tvPredictionExplanation.text = getString(com.airguard.ai.R.string.ml_loading)
+            binding.tvModelTag.text = "On-device ML • ONNX Runtime"
+            return
+        }
+        val risk = mlResult.mlPrediction
         binding.tvPredictionValue.text = risk.label
-        binding.tvPredictionConfidence.text = "Confidence: ${prediction.confidencePercent}%"
+        binding.tvPredictionConfidence.text = "Confidence: ${mlResult.mlConfidencePercent}%"
         binding.tvPredictionIcon.text = risk.emoji
         binding.tvPredictionExplanation.text = risk.advice
-        binding.tvModelTag.text = "On-device ML • Random Forest • ${prediction.confidencePercent}% confidence"
+        binding.tvModelTag.text = "On-device ML • ONNX Random Forest • ${mlResult.mlConfidencePercent}% confidence"
 
         try {
             binding.tvPredictionValue.setTextColor(Color.parseColor(risk.colorHex))
         } catch (_: Exception) {}
+
+        // Update AQI-derived comparison column from the same reading
+        updateAqiComparisonColumn(mlResult.aqiDerivedRisk)
+    }
+
+    private fun updateLegacyFeatureContributions(prediction: PredictionResult) {
+        // Legacy classifier feature contributions — kept for reference display.
+        // This does NOT set user-facing risk classification (that comes from ONNX).
     }
 
     private fun updateConnectivityStatus() {
@@ -198,6 +224,50 @@ class DashboardFragment : Fragment() {
 
         chart.data = LineData(aqiSet)
         chart.invalidate()
+    }
+
+    private fun updateAqiComparisonColumn(risk: RiskLevel) {
+        binding.tvAqiClassEmoji.text = risk.emoji
+        binding.tvAqiClassLabel.text = risk.label
+        try { binding.tvAqiClassLabel.setTextColor(Color.parseColor(risk.colorHex)) } catch (_: Exception) {}
+        // Refresh agreement note whenever either side updates
+        refreshAgreementNote()
+    }
+
+    private fun updateMlComparisonColumn(mlResult: MlPredictionResult?) {
+        if (mlResult == null) {
+            // Loading or not yet computed
+            binding.tvMlClassEmoji.text = "\u23F3"  // ⏳
+            binding.tvMlClassLabel.text = getString(com.airguard.ai.R.string.ml_loading)
+            binding.tvMlClassLabel.setTextColor(Color.parseColor("#888888"))
+            binding.tvClassificationAgreement.visibility = View.GONE
+            return
+        }
+        val mlRisk = mlResult.mlPrediction
+        binding.tvMlClassEmoji.text = mlRisk.emoji
+        binding.tvMlClassLabel.text = mlRisk.label
+        try { binding.tvMlClassLabel.setTextColor(Color.parseColor(mlRisk.colorHex)) } catch (_: Exception) {}
+        refreshAgreementNote()
+    }
+
+    private fun refreshAgreementNote() {
+        // Only show if both sides have real values
+        val aqlText = binding.tvAqiClassLabel.text
+        val mlText  = binding.tvMlClassLabel.text
+        val mlLoading = mlText == getString(com.airguard.ai.R.string.ml_loading) ||
+                        mlText == getString(com.airguard.ai.R.string.ml_unavailable)
+        if (aqlText.isNullOrBlank() || aqlText == "--" || mlLoading) {
+            binding.tvClassificationAgreement.visibility = View.GONE
+            return
+        }
+        binding.tvClassificationAgreement.visibility = View.VISIBLE
+        if (aqlText == mlText) {
+            binding.tvClassificationAgreement.text = getString(com.airguard.ai.R.string.classifications_agree)
+            binding.tvClassificationAgreement.setTextColor(Color.parseColor("#2E7D32"))
+        } else {
+            binding.tvClassificationAgreement.text = getString(com.airguard.ai.R.string.classifications_differ)
+            binding.tvClassificationAgreement.setTextColor(Color.parseColor("#E65100"))
+        }
     }
 
     override fun onDestroyView() {

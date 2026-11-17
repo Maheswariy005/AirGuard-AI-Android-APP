@@ -1,0 +1,2 @@
+c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\plot_architecture.py:291: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout(pad=0)

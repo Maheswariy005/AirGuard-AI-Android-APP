@@ -1,0 +1,127 @@
+========================================================================
+CHECK A: MODEL ARTIFACT CONSISTENCY
+========================================================================
+  best_model.pkl                : EXISTS       5.39 MB  MD5=7c877bd85e1f...
+  audit_model_c.pkl             : EXISTS       5.39 MB  MD5=7c877bd85e1f...
+  audit_model_c.onnx            : EXISTS       3.09 MB  MD5=1064bcb96234...
+  audit_scaler.pkl              : EXISTS       0.00 MB  MD5=ebb179d82ada...
+  audit_label_encoder.pkl       : EXISTS       0.00 MB  MD5=7a0c1d20ae00...
+  audit_config.json             : EXISTS       0.00 MB  MD5=c758bc9d338c...
+
+Comparing best_model.pkl vs audit_model_c.pkl:
+  n_estimators        : best=200  audit=200  MATCH
+  n_features_in_      : best=7  audit=7  MATCH
+  n_classes_          : best=5  audit=5  MATCH
+  class_weight        : best=balanced  audit=balanced  MATCH
+  random_state        : best=42  audit=42  MATCH
+  max_features        : best=sqrt  audit=sqrt  MATCH
+  Max feature importance diff: 0.0000000000  IDENTICAL
+  Tree 0 structure identical: True
+
+  VERDICT: Models are IDENTICAL
+
+Scaler consistency (vs audit_config.json):
+  Max mean diff  : 4.68e-09  OK
+  Max scale diff : 4.77e-09  OK
+
+LabelEncoder classes: [np.str_('GOOD'), np.str_('HAZARDOUS'), np.str_('MODERATE'), np.str_('UNHEALTHY'), np.str_('UNHEALTHY_SENSITIVE'), np.str_('VERY_UNHEALTHY')]
+  VERY_UNHEALTHY in le.classes_: True
+
+ONNX model inspection:
+  IR version    : 10
+  opset version : 9
+  Inputs (1):
+    float_input: dim {
+}
+dim {
+  dim_value: 7
+}
+
+  Outputs (2):
+    output_label: type=tensor_type {
+  elem_type: 7
+  shape {
+    dim {
+    }
+  }
+}
+
+    output_probability: type=sequence_type {
+  elem_type {
+    map_type {
+      key_type: 7
+      value_type {
+        tensor_type {
+          elem_type: 1
+        }
+      }
+    }
+  }
+}
+
+
+  ONNX input name  : float_input
+  ONNX output names: ['output_label', 'output_probability']
+  ONNX input shape : [None, 7]
+  ONNX output 0 (label) type: tensor(int64)
+  ONNX output 1 (proba) type: seq(map(int64,tensor(float)))
+
+  ONNX sample output — raw label: [0]  type: <class 'numpy.int64'>
+  ONNX sample proba dict: [{0: 0.7617326378822327, 1: 0.0, 2: 0.14169928431510925, 3: 0.01733333244919777, 4: 0.07923463732004166}]
+  ONNX proba keys (class integers): [0, 1, 2, 3, 4]
+  Mapping (via LabelEncoder):
+    ONNX key 0 -> GOOD  prob=0.761733
+    ONNX key 1 -> HAZARDOUS  prob=0.000000
+    ONNX key 2 -> MODERATE  prob=0.141699
+    ONNX key 3 -> UNHEALTHY  prob=0.017333
+    ONNX key 4 -> UNHEALTHY_SENSITIVE  prob=0.079235
+
+Check A complete.
+
+========================================================================
+CHECK B: FULL 782-SAMPLE SKLEARN vs ONNX EQUIVALENCE
+========================================================================
+Total test samples           : 782
+Predicted-class matches      : 782
+Predicted-class mismatches   : 0
+Agreement rate               : 100.0000%
+100% agreement: YES
+
+Probability comparison (sklearn float64 vs ONNX float32):
+  Max absolute difference (any class, any sample): 4.21e-07
+  Mean absolute difference                       : 5.17e-08
+  Per-class max difference:
+    class 0 (GOOD                    ): max_diff=2.39e-07
+    class 1 (HAZARDOUS               ): max_diff=2.84e-07
+    class 2 (MODERATE                ): max_diff=1.34e-07
+    class 3 (UNHEALTHY               ): max_diff=4.21e-07
+    class 4 (UNHEALTHY_SENSITIVE     ): max_diff=3.65e-07
+
+  Samples with any prob diff > 1%  : 0/782
+  Samples with any prob diff > 0.1%: 0/782
+
+Per-class prediction breakdown:
+  Class                          True  SK_pred  ONNX_pred  Match
+  GOOD                              8        9          9    YES
+  MODERATE                         11       13         13    YES
+  UNHEALTHY_SENSITIVE              25       30         30    YES
+  UNHEALTHY                       616      670        670    YES
+  VERY_UNHEALTHY                    0        0          0    YES
+  HAZARDOUS                       122       60         60    YES
+
+ONNX output class mapping (confirmed):
+  ONNX outputs integer labels using LabelEncoder alphabetical encoding:
+    ONNX integer 0 -> GOOD
+    ONNX integer 1 -> HAZARDOUS
+    ONNX integer 2 -> MODERATE
+    ONNX integer 3 -> UNHEALTHY
+    ONNX integer 4 -> UNHEALTHY_SENSITIVE
+  VERY_UNHEALTHY is NOT in ONNX output (never trained)
+  Output tensor dimensions: label=(n,), proba=list of 5-key dicts
+
+Results saved to: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\pre_integration_checks.json
+
+FINAL STATUS:
+  Check A (artifact consistency): PASS
+  Check B (782-sample equivalence): PASS
+Done.

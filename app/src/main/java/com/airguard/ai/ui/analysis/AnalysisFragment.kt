@@ -8,9 +8,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.airguard.ai.R
 import com.airguard.ai.data.RiskLevel
 import com.airguard.ai.databinding.FragmentAnalysisBinding
 import com.airguard.ai.ml.AirQualityClassifier
+import com.airguard.ai.ml.FeatureScaler
+import com.airguard.ai.ml.MlPredictionResult
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
@@ -34,44 +37,16 @@ class AnalysisFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.latestPrediction.observe(viewLifecycleOwner) { prediction ->
-            prediction ?: return@observe
-            val risk = prediction.riskLevel
-            binding.tvRiskEmoji.text = risk.emoji
-            binding.tvRiskName.text = risk.label
-            binding.tvRiskDescription.text = risk.description
-            binding.tvConfidence.text = "${prediction.confidencePercent}%"
-            try { binding.tvRiskName.setTextColor(Color.parseColor(risk.colorHex)) } catch (_: Exception) {}
+            // Legacy classifier — no longer used for user-facing display.
+            // Confidence, risk level, and feature importance now come from
+            // the ONNX model via latestMlPrediction observer below.
+        }
 
-            // Feature contributions
-            binding.featureContainer.removeAllViews()
-            val topFeatures = prediction.topFeaturesByImportance()
-            topFeatures.forEach { (name, importance) ->
-                val row = layoutInflater.inflate(android.R.layout.simple_list_item_1, binding.featureContainer, false)
-                // Build a simple row: label + bar
-                val container = LinearLayout(requireContext()).apply {
-                    orientation = LinearLayout.HORIZONTAL
-                    layoutParams = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                    ).also { it.bottomMargin = 6 }
-                }
-                val label = TextView(requireContext()).apply {
-                    text = name
-                    textSize = 12f
-                    setTextColor(Color.parseColor("#666680"))
-                    layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-                }
-                val pct = TextView(requireContext()).apply {
-                    text = "${(importance * 100).toInt()}%"
-                    textSize = 12f
-                    setTextColor(Color.parseColor("#1565C0"))
-                    textAlignment = View.TEXT_ALIGNMENT_TEXT_END
-                    layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                }
-                container.addView(label)
-                container.addView(pct)
-                binding.featureContainer.addView(container)
-            }
+        // Observe ML prediction (OnnxClassifier, 7 sensor features, AQI excluded)
+        // This drives the "Latest Prediction" card, the comparison card, and Key Factors.
+        viewModel.latestMlPrediction.observe(viewLifecycleOwner) { mlResult ->
+            updateAnalysisPredictionCard(mlResult)
+            updateAnalysisMlColumn(mlResult)
         }
 
         viewModel.aqiDistribution.observe(viewLifecycleOwner) { dist ->
@@ -212,6 +187,131 @@ class AnalysisFragment : Fragment() {
         combinedData.setData(LineData(tempSet, humidSet))
         binding.chartCombined.data = combinedData
         binding.chartCombined.invalidate()
+    }
+
+    private fun updateAnalysisPredictionCard(mlResult: MlPredictionResult?) {
+        if (mlResult == null) {
+            binding.tvRiskEmoji.text = "\u23F3"
+            binding.tvRiskName.text = getString(R.string.ml_loading)
+            binding.tvRiskDescription.text = ""
+            binding.tvConfidence.text = "--"
+            binding.featureContainer.removeAllViews()
+            return
+        }
+
+        // Risk level, confidence, and description from the ONNX model
+        val risk = mlResult.mlPrediction
+        binding.tvRiskEmoji.text = risk.emoji
+        binding.tvRiskName.text = risk.label
+        binding.tvRiskDescription.text = risk.description
+        binding.tvConfidence.text = "${mlResult.mlConfidencePercent}%"
+        try { binding.tvRiskName.setTextColor(Color.parseColor(risk.colorHex)) } catch (_: Exception) {}
+
+        // Key Factors: verified ONNX feature importances (7 features, AQI excluded)
+        binding.featureContainer.removeAllViews()
+        val names = FeatureScaler.FEATURE_NAMES
+        val importances = FeatureScaler.FEATURE_IMPORTANCES
+        // Sort by importance descending, show top 4
+        val sorted = names.indices.sortedByDescending { importances[it] }.take(4)
+        for (i in sorted) {
+            val container = LinearLayout(requireContext()).apply {
+                orientation = LinearLayout.HORIZONTAL
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).also { it.bottomMargin = 6 }
+            }
+            val label = TextView(requireContext()).apply {
+                text = names[i]
+                textSize = 12f
+                setTextColor(Color.parseColor("#666680"))
+                layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+            }
+            val pct = TextView(requireContext()).apply {
+                text = "${(importances[i] * 100).toInt()}%"
+                textSize = 12f
+                setTextColor(Color.parseColor("#1565C0"))
+                textAlignment = View.TEXT_ALIGNMENT_TEXT_END
+            }
+            container.addView(label)
+            container.addView(pct)
+            binding.featureContainer.addView(container)
+        }
+    }
+
+    private fun updateAnalysisMlColumn(mlResult: MlPredictionResult?) {
+        if (mlResult == null) {
+            binding.tvAnalysisMlEmoji.text = "\u23F3"  // ⏳
+            binding.tvAnalysisMlLabel.text = getString(R.string.ml_loading)
+            binding.tvAnalysisMlLabel.setTextColor(Color.parseColor("#888888"))
+            binding.tvAnalysisAgreement.visibility = View.GONE
+            binding.mlFeaturesContainer.removeAllViews()
+            return
+        }
+
+        // AQI-derived category — from the deterministic RiskLevel.fromAqi() threshold
+        // (carried in mlResult.aqiDerivedRisk, set by OnnxClassifier.predict(reading))
+        val aqiRisk = mlResult.aqiDerivedRisk
+        binding.tvAnalysisAqiEmoji.text = aqiRisk.emoji
+        binding.tvAnalysisAqiLabel.text = aqiRisk.label
+        try { binding.tvAnalysisAqiLabel.setTextColor(Color.parseColor(aqiRisk.colorHex)) } catch (_: Exception) {}
+
+        // ML-predicted category — from ONNX model (7 sensor features, AQI excluded)
+        val mlRisk = mlResult.mlPrediction
+        binding.tvAnalysisMlEmoji.text = mlRisk.emoji
+        binding.tvAnalysisMlLabel.text = mlRisk.label
+        try { binding.tvAnalysisMlLabel.setTextColor(Color.parseColor(mlRisk.colorHex)) } catch (_: Exception) {}
+        refreshAnalysisAgreementNote()
+
+        // Show the 7 ML input feature values (from rawFeatures in result)
+        binding.mlFeaturesContainer.removeAllViews()
+        val featureNames = listOf("Temperature", "Humidity", "Pressure", "Gas Resistance",
+                                  "Altitude", "Dew Point", "Heat Index")
+        val featureUnits = listOf("°C", "%", "hPa", "kΩ", "m", "°C", "°C")
+        mlResult.rawFeatures.forEachIndexed { i, v ->
+            if (i >= featureNames.size) return@forEachIndexed
+            val row = LinearLayout(requireContext()).apply {
+                orientation = LinearLayout.HORIZONTAL
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).also { it.bottomMargin = 4 }
+            }
+            val nameView = TextView(requireContext()).apply {
+                text = featureNames[i]
+                textSize = 11f
+                setTextColor(Color.parseColor("#666680"))
+                layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+            }
+            val valView = TextView(requireContext()).apply {
+                text = "%.1f %s".format(v, featureUnits[i])
+                textSize = 11f
+                setTextColor(Color.parseColor("#1A1A2E"))
+                textAlignment = View.TEXT_ALIGNMENT_TEXT_END
+            }
+            row.addView(nameView)
+            row.addView(valView)
+            binding.mlFeaturesContainer.addView(row)
+        }
+    }
+
+    private fun refreshAnalysisAgreementNote() {
+        val aqiText = binding.tvAnalysisAqiLabel.text
+        val mlText  = binding.tvAnalysisMlLabel.text
+        val mlLoading = mlText == getString(R.string.ml_loading) ||
+                        mlText == getString(R.string.ml_unavailable)
+        if (aqiText.isNullOrBlank() || aqiText == "--" || mlLoading) {
+            binding.tvAnalysisAgreement.visibility = View.GONE
+            return
+        }
+        binding.tvAnalysisAgreement.visibility = View.VISIBLE
+        if (aqiText == mlText) {
+            binding.tvAnalysisAgreement.text = getString(R.string.classifications_agree)
+            binding.tvAnalysisAgreement.setTextColor(Color.parseColor("#2E7D32"))
+        } else {
+            binding.tvAnalysisAgreement.text = getString(R.string.classifications_differ)
+            binding.tvAnalysisAgreement.setTextColor(Color.parseColor("#E65100"))
+        }
     }
 
     override fun onDestroyView() {

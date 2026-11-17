@@ -6,6 +6,8 @@ import com.airguard.ai.data.SensorReading
 import com.airguard.ai.data.SensorRepository
 import com.airguard.ai.data.SyncResult
 import com.airguard.ai.ml.AirQualityClassifier
+import com.airguard.ai.ml.MlPredictionResult
+import com.airguard.ai.ml.OnnxClassifier
 import com.airguard.ai.ml.PredictionResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,6 +19,7 @@ class DashboardViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo = SensorRepository(app)
     private val classifier = AirQualityClassifier()
+    private val onnxClassifier = OnnxClassifier(app)
 
     private val _latestReading = MutableLiveData<SensorReading?>()
     val latestReading: LiveData<SensorReading?> = _latestReading
@@ -29,6 +32,10 @@ class DashboardViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _prediction = MutableLiveData<PredictionResult?>()
     val prediction: LiveData<PredictionResult?> = _prediction
+
+    /** ML model prediction (7 sensor features, AQI excluded). */
+    private val _mlPrediction = MutableLiveData<MlPredictionResult?>()
+    val mlPrediction: LiveData<MlPredictionResult?> = _mlPrediction
 
     val isOnline: Boolean get() = repo.isNetworkAvailable()
     val isDataStale: Boolean get() = repo.isDataStale()
@@ -45,6 +52,11 @@ class DashboardViewModel(app: Application) : AndroidViewModel(app) {
             recent.firstOrNull()?.let { reading ->
                 val result = withContext(Dispatchers.Default) { classifier.predict(reading) }
                 _prediction.value = result
+                // ML prediction (AQI excluded from input)
+                val mlResult = runCatching {
+                    withContext(Dispatchers.Default) { onnxClassifier.predict(reading) }
+                }.getOrNull()
+                _mlPrediction.value = mlResult
             }
         }
     }
@@ -74,7 +86,16 @@ class DashboardViewModel(app: Application) : AndroidViewModel(app) {
             val reading = repo.getMostRecent() ?: return@launch
             val result = withContext(Dispatchers.Default) { classifier.predict(reading) }
             _prediction.value = result
+            val mlResult = runCatching {
+                withContext(Dispatchers.Default) { onnxClassifier.predict(reading) }
+            }.getOrNull()
+            _mlPrediction.value = mlResult
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        onnxClassifier.close()
     }
 }
 

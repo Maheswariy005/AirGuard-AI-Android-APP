@@ -1,0 +1,1934 @@
+{
+  "description": "Ground-truth test vectors for Kotlin equivalence testing",
+  "model": "RF class_weight=balanced, 200 trees, random_state=42",
+  "split_cutoff": "2026-06-01",
+  "canonical_class_order": [
+    "GOOD",
+    "MODERATE",
+    "UNHEALTHY_SENSITIVE",
+    "UNHEALTHY",
+    "VERY_UNHEALTHY",
+    "HAZARDOUS"
+  ],
+  "label_encoder_alphabetical_classes": [
+    "GOOD",
+    "HAZARDOUS",
+    "MODERATE",
+    "UNHEALTHY",
+    "UNHEALTHY_SENSITIVE",
+    "VERY_UNHEALTHY"
+  ],
+  "label_encoder_mapping": {
+    "0": "GOOD",
+    "1": "HAZARDOUS",
+    "2": "MODERATE",
+    "3": "UNHEALTHY",
+    "4": "UNHEALTHY_SENSITIVE",
+    "5": "VERY_UNHEALTHY"
+  },
+  "features_in_order": [
+    "Temperature(\u00b0C)",
+    "Humidity(%)",
+    "Pressure(hPa)",
+    "Gas (kOhms)",
+    "Altitude(m)",
+    "DewPoint(\u00b0C)",
+    "HeatIndex(\u00b0C)"
+  ],
+  "scaler_means": {
+    "Temperature(\u00b0C)": 32.4042561,
+    "Humidity(%)": 65.03094487,
+    "Pressure(hPa)": 1002.64091435,
+    "Gas (kOhms)": 253.99559659,
+    "Altitude(m)": 88.79958965,
+    "DewPoint(\u00b0C)": 25.38847327,
+    "HeatIndex(\u00b0C)": 39.36000105
+  },
+  "scaler_scales": {
+    "Temperature(\u00b0C)": 4.20542132,
+    "Humidity(%)": 7.39775017,
+    "Pressure(hPa)": 5.99102545,
+    "Gas (kOhms)": 89.545656,
+    "Altitude(m)": 50.33614874,
+    "DewPoint(\u00b0C)": 4.75820964,
+    "HeatIndex(\u00b0C)": 7.73907547
+  },
+  "scaling_formula": "scaled = (raw - mean) / scale",
+  "prediction_formula": "predict = argmax(mean(per_tree_predict_proba))",
+  "n_vectors": 48,
+  "vectors": [
+    {
+      "index": 0,
+      "true_class": "GOOD",
+      "predicted_class": "GOOD",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.2,
+        "Humidity(%)": 71.5,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 30.9,
+        "Altitude(m)": 58.8,
+        "DewPoint(\u00b0C)": 27.5,
+        "HeatIndex(\u00b0C)": 42.5
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.189219,
+        "Humidity(%)": 0.874463,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": -2.491417,
+        "Altitude(m)": -0.595985,
+        "DewPoint(\u00b0C)": 0.443765,
+        "HeatIndex(\u00b0C)": 0.405733
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.76173264,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.14169928,
+        "UNHEALTHY": 0.01733333,
+        "UNHEALTHY_SENSITIVE": 0.07923464
+      },
+      "predicted_encoded_int": 0,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.761733,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.141699,
+        "UNHEALTHY": 0.017333,
+        "UNHEALTHY_SENSITIVE": 0.079235
+      }
+    },
+    {
+      "index": 153,
+      "true_class": "GOOD",
+      "predicted_class": "GOOD",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.6,
+        "Humidity(%)": 54.9,
+        "Pressure(hPa)": 996.1,
+        "Gas (kOhms)": 20.4,
+        "Altitude(m)": 143.7,
+        "DewPoint(\u00b0C)": 22.5,
+        "HeatIndex(\u00b0C)": 34.5
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.191243,
+        "Humidity(%)": -1.369463,
+        "Pressure(hPa)": -1.091785,
+        "Gas (kOhms)": -2.608676,
+        "Altitude(m)": 1.090676,
+        "DewPoint(\u00b0C)": -0.60705,
+        "HeatIndex(\u00b0C)": -0.627982
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.65358138,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.15486634,
+        "UNHEALTHY": 0.02291667,
+        "UNHEALTHY_SENSITIVE": 0.16863552
+      },
+      "predicted_encoded_int": 0,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.653581,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.154866,
+        "UNHEALTHY": 0.022917,
+        "UNHEALTHY_SENSITIVE": 0.168636
+      }
+    },
+    {
+      "index": 154,
+      "true_class": "GOOD",
+      "predicted_class": "GOOD",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.4,
+        "Humidity(%)": 54.1,
+        "Pressure(hPa)": 996.1,
+        "Gas (kOhms)": 39.4,
+        "Altitude(m)": 143.5,
+        "DewPoint(\u00b0C)": 22.2,
+        "HeatIndex(\u00b0C)": 34.0
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.2388,
+        "Humidity(%)": -1.477604,
+        "Pressure(hPa)": -1.091785,
+        "Gas (kOhms)": -2.396494,
+        "Altitude(m)": 1.086702,
+        "DewPoint(\u00b0C)": -0.670099,
+        "HeatIndex(\u00b0C)": -0.692589
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.63358134,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.12551852,
+        "UNHEALTHY": 0.06041666,
+        "UNHEALTHY_SENSITIVE": 0.18048334
+      },
+      "predicted_encoded_int": 0,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.633581,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.125519,
+        "UNHEALTHY": 0.060417,
+        "UNHEALTHY_SENSITIVE": 0.180483
+      }
+    },
+    {
+      "index": 338,
+      "true_class": "GOOD",
+      "predicted_class": "GOOD",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.1,
+        "Humidity(%)": 58.3,
+        "Pressure(hPa)": 997.8,
+        "Gas (kOhms)": 21.2,
+        "Altitude(m)": 129.0,
+        "DewPoint(\u00b0C)": 22.8,
+        "HeatIndex(\u00b0C)": 34.6
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.310137,
+        "Humidity(%)": -0.909864,
+        "Pressure(hPa)": -0.808028,
+        "Gas (kOhms)": -2.599742,
+        "Altitude(m)": 0.798639,
+        "DewPoint(\u00b0C)": -0.544002,
+        "HeatIndex(\u00b0C)": -0.615061
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.6823802,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.13140534,
+        "UNHEALTHY": 0.01583333,
+        "UNHEALTHY_SENSITIVE": 0.17038092
+      },
+      "predicted_encoded_int": 0,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.68238,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.131405,
+        "UNHEALTHY": 0.015833,
+        "UNHEALTHY_SENSITIVE": 0.170381
+      }
+    },
+    {
+      "index": 416,
+      "true_class": "GOOD",
+      "predicted_class": "GOOD",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.9,
+        "Humidity(%)": 67.3,
+        "Pressure(hPa)": 1000.0,
+        "Gas (kOhms)": 17.9,
+        "Altitude(m)": 110.8,
+        "DewPoint(\u00b0C)": 27.3,
+        "HeatIndex(\u00b0C)": 42.2
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.35567,
+        "Humidity(%)": 0.306722,
+        "Pressure(hPa)": -0.440812,
+        "Gas (kOhms)": -2.636595,
+        "Altitude(m)": 0.43707,
+        "DewPoint(\u00b0C)": 0.401732,
+        "HeatIndex(\u00b0C)": 0.366969
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.7560268,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.13182767,
+        "UNHEALTHY": 0.05373683,
+        "UNHEALTHY_SENSITIVE": 0.05840868
+      },
+      "predicted_encoded_int": 0,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.756027,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.131828,
+        "UNHEALTHY": 0.053737,
+        "UNHEALTHY_SENSITIVE": 0.058409
+      }
+    },
+    {
+      "index": 417,
+      "true_class": "GOOD",
+      "predicted_class": "GOOD",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.7,
+        "Humidity(%)": 65.8,
+        "Pressure(hPa)": 1000.0,
+        "Gas (kOhms)": 37.8,
+        "Altitude(m)": 110.6,
+        "DewPoint(\u00b0C)": 26.9,
+        "HeatIndex(\u00b0C)": 41.3
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.308113,
+        "Humidity(%)": 0.103958,
+        "Pressure(hPa)": -0.440812,
+        "Gas (kOhms)": -2.414362,
+        "Altitude(m)": 0.433097,
+        "DewPoint(\u00b0C)": 0.317667,
+        "HeatIndex(\u00b0C)": 0.250676
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.74888659,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.16021132,
+        "UNHEALTHY": 0.03999427,
+        "UNHEALTHY_SENSITIVE": 0.0509077
+      },
+      "predicted_encoded_int": 0,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.748887,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.160211,
+        "UNHEALTHY": 0.039994,
+        "UNHEALTHY_SENSITIVE": 0.050908
+      }
+    },
+    {
+      "index": 754,
+      "true_class": "GOOD",
+      "predicted_class": "GOOD",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 27.1,
+        "Humidity(%)": 63.8,
+        "Pressure(hPa)": 1002.8,
+        "Gas (kOhms)": 27.9,
+        "Altitude(m)": 87.5,
+        "DewPoint(\u00b0C)": 19.9,
+        "HeatIndex(\u00b0C)": 29.8
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -1.26129,
+        "Humidity(%)": -0.166394,
+        "Pressure(hPa)": 0.026554,
+        "Gas (kOhms)": -2.52492,
+        "Altitude(m)": -0.025818,
+        "DewPoint(\u00b0C)": -1.153474,
+        "HeatIndex(\u00b0C)": -1.23529
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.76417279,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.06927934,
+        "UNHEALTHY": 0.013,
+        "UNHEALTHY_SENSITIVE": 0.15354763
+      },
+      "predicted_encoded_int": 0,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.764173,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.069279,
+        "UNHEALTHY": 0.013,
+        "UNHEALTHY_SENSITIVE": 0.153548
+      }
+    },
+    {
+      "index": 758,
+      "true_class": "GOOD",
+      "predicted_class": "GOOD",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 27.3,
+        "Humidity(%)": 59.0,
+        "Pressure(hPa)": 1000.6,
+        "Gas (kOhms)": 34.2,
+        "Altitude(m)": 105.5,
+        "DewPoint(\u00b0C)": 19.1,
+        "HeatIndex(\u00b0C)": 29.0
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -1.213732,
+        "Humidity(%)": -0.81524,
+        "Pressure(hPa)": -0.340662,
+        "Gas (kOhms)": -2.454565,
+        "Altitude(m)": 0.331778,
+        "DewPoint(\u00b0C)": -1.321605,
+        "HeatIndex(\u00b0C)": -1.338661
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.57236779,
+        "HAZARDOUS": 0.1001884,
+        "MODERATE": 0.05191771,
+        "UNHEALTHY": 0.18304968,
+        "UNHEALTHY_SENSITIVE": 0.0924762
+      },
+      "predicted_encoded_int": 0,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.572368,
+        "HAZARDOUS": 0.100188,
+        "MODERATE": 0.051918,
+        "UNHEALTHY": 0.18305,
+        "UNHEALTHY_SENSITIVE": 0.092476
+      }
+    },
+    {
+      "index": 1,
+      "true_class": "MODERATE",
+      "predicted_class": "MODERATE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.1,
+        "Humidity(%)": 70.3,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 58.5,
+        "Altitude(m)": 58.5,
+        "DewPoint(\u00b0C)": 27.2,
+        "HeatIndex(\u00b0C)": 41.9
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.16544,
+        "Humidity(%)": 0.712251,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": -2.183195,
+        "Altitude(m)": -0.601945,
+        "DewPoint(\u00b0C)": 0.380716,
+        "HeatIndex(\u00b0C)": 0.328204
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.03582313,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.77742887,
+        "UNHEALTHY": 0.03853977,
+        "UNHEALTHY_SENSITIVE": 0.14820811
+      },
+      "predicted_encoded_int": 2,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.035823,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.777429,
+        "UNHEALTHY": 0.03854,
+        "UNHEALTHY_SENSITIVE": 0.148208
+      }
+    },
+    {
+      "index": 2,
+      "true_class": "MODERATE",
+      "predicted_class": "MODERATE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.2,
+        "Humidity(%)": 69.8,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 87.2,
+        "Altitude(m)": 58.7,
+        "DewPoint(\u00b0C)": 27.2,
+        "HeatIndex(\u00b0C)": 42.0
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.189219,
+        "Humidity(%)": 0.644663,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": -1.862688,
+        "Altitude(m)": -0.597972,
+        "DewPoint(\u00b0C)": 0.380716,
+        "HeatIndex(\u00b0C)": 0.341126
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.03141854,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.77930611,
+        "UNHEALTHY": 0.07173241,
+        "UNHEALTHY_SENSITIVE": 0.1175429
+      },
+      "predicted_encoded_int": 2,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.031419,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.779306,
+        "UNHEALTHY": 0.071732,
+        "UNHEALTHY_SENSITIVE": 0.117543
+      }
+    },
+    {
+      "index": 155,
+      "true_class": "MODERATE",
+      "predicted_class": "MODERATE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.5,
+        "Humidity(%)": 53.6,
+        "Pressure(hPa)": 996.2,
+        "Gas (kOhms)": 58.0,
+        "Altitude(m)": 143.1,
+        "DewPoint(\u00b0C)": 22.3,
+        "HeatIndex(\u00b0C)": 34.1
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.215022,
+        "Humidity(%)": -1.545192,
+        "Pressure(hPa)": -1.075094,
+        "Gas (kOhms)": -2.188778,
+        "Altitude(m)": 1.078756,
+        "DewPoint(\u00b0C)": -0.649083,
+        "HeatIndex(\u00b0C)": -0.679668
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.05874124,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.55884707,
+        "UNHEALTHY": 0.07916666,
+        "UNHEALTHY_SENSITIVE": 0.30324489
+      },
+      "predicted_encoded_int": 2,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.058741,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.558847,
+        "UNHEALTHY": 0.079167,
+        "UNHEALTHY_SENSITIVE": 0.303245
+      }
+    },
+    {
+      "index": 156,
+      "true_class": "MODERATE",
+      "predicted_class": "MODERATE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.6,
+        "Humidity(%)": 53.2,
+        "Pressure(hPa)": 996.2,
+        "Gas (kOhms)": 76.3,
+        "Altitude(m)": 143.4,
+        "DewPoint(\u00b0C)": 22.3,
+        "HeatIndex(\u00b0C)": 34.1
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.191243,
+        "Humidity(%)": -1.599263,
+        "Pressure(hPa)": -1.075094,
+        "Gas (kOhms)": -1.984413,
+        "Altitude(m)": 1.084716,
+        "DewPoint(\u00b0C)": -0.649083,
+        "HeatIndex(\u00b0C)": -0.679668
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.04491755,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.57767075,
+        "UNHEALTHY": 0.07916666,
+        "UNHEALTHY_SENSITIVE": 0.29824489
+      },
+      "predicted_encoded_int": 2,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.044918,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.577671,
+        "UNHEALTHY": 0.079167,
+        "UNHEALTHY_SENSITIVE": 0.298245
+      }
+    },
+    {
+      "index": 157,
+      "true_class": "MODERATE",
+      "predicted_class": "MODERATE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.7,
+        "Humidity(%)": 53.0,
+        "Pressure(hPa)": 996.2,
+        "Gas (kOhms)": 94.8,
+        "Altitude(m)": 143.1,
+        "DewPoint(\u00b0C)": 22.3,
+        "HeatIndex(\u00b0C)": 34.1
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.167464,
+        "Humidity(%)": -1.626298,
+        "Pressure(hPa)": -1.075094,
+        "Gas (kOhms)": -1.777815,
+        "Altitude(m)": 1.078756,
+        "DewPoint(\u00b0C)": -0.649083,
+        "HeatIndex(\u00b0C)": -0.679668
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.04241755,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.58517075,
+        "UNHEALTHY": 0.07749999,
+        "UNHEALTHY_SENSITIVE": 0.29491156
+      },
+      "predicted_encoded_int": 2,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.042418,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.585171,
+        "UNHEALTHY": 0.0775,
+        "UNHEALTHY_SENSITIVE": 0.294912
+      }
+    },
+    {
+      "index": 339,
+      "true_class": "MODERATE",
+      "predicted_class": "GOOD",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 30.9,
+        "Humidity(%)": 58.2,
+        "Pressure(hPa)": 997.9,
+        "Gas (kOhms)": 47.6,
+        "Altitude(m)": 128.5,
+        "DewPoint(\u00b0C)": 22.5,
+        "HeatIndex(\u00b0C)": 34.3
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.357695,
+        "Humidity(%)": -0.923381,
+        "Pressure(hPa)": -0.791336,
+        "Gas (kOhms)": -2.30492,
+        "Altitude(m)": 0.788706,
+        "DewPoint(\u00b0C)": -0.60705,
+        "HeatIndex(\u00b0C)": -0.653825
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.68575031,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.12803522,
+        "UNHEALTHY": 0.01583333,
+        "UNHEALTHY_SENSITIVE": 0.17038092
+      },
+      "predicted_encoded_int": 0,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.685751,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.128035,
+        "UNHEALTHY": 0.015833,
+        "UNHEALTHY_SENSITIVE": 0.170381
+      }
+    },
+    {
+      "index": 340,
+      "true_class": "MODERATE",
+      "predicted_class": "MODERATE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 30.9,
+        "Humidity(%)": 58.5,
+        "Pressure(hPa)": 997.9,
+        "Gas (kOhms)": 78.6,
+        "Altitude(m)": 128.3,
+        "DewPoint(\u00b0C)": 22.6,
+        "HeatIndex(\u00b0C)": 34.4
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.357695,
+        "Humidity(%)": -0.882829,
+        "Pressure(hPa)": -0.791336,
+        "Gas (kOhms)": -1.958728,
+        "Altitude(m)": 0.784732,
+        "DewPoint(\u00b0C)": -0.586034,
+        "HeatIndex(\u00b0C)": -0.640904
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.0177451,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.55825877,
+        "UNHEALTHY": 0.02833333,
+        "UNHEALTHY_SENSITIVE": 0.39566261
+      },
+      "predicted_encoded_int": 2,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.017745,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.558259,
+        "UNHEALTHY": 0.028333,
+        "UNHEALTHY_SENSITIVE": 0.395663
+      }
+    },
+    {
+      "index": 418,
+      "true_class": "MODERATE",
+      "predicted_class": "MODERATE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.9,
+        "Humidity(%)": 64.5,
+        "Pressure(hPa)": 1000.0,
+        "Gas (kOhms)": 60.2,
+        "Altitude(m)": 110.5,
+        "DewPoint(\u00b0C)": 26.7,
+        "HeatIndex(\u00b0C)": 41.1
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.35567,
+        "Humidity(%)": -0.071771,
+        "Pressure(hPa)": -0.440812,
+        "Gas (kOhms)": -2.16421,
+        "Altitude(m)": 0.43111,
+        "DewPoint(\u00b0C)": 0.275634,
+        "HeatIndex(\u00b0C)": 0.224833
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.10502939,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.67602807,
+        "UNHEALTHY": 0.0842935,
+        "UNHEALTHY_SENSITIVE": 0.13464896
+      },
+      "predicted_encoded_int": 2,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.105029,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.676028,
+        "UNHEALTHY": 0.084294,
+        "UNHEALTHY_SENSITIVE": 0.134649
+      }
+    },
+    {
+      "index": 419,
+      "true_class": "MODERATE",
+      "predicted_class": "MODERATE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.9,
+        "Humidity(%)": 65.4,
+        "Pressure(hPa)": 1000.1,
+        "Gas (kOhms)": 77.2,
+        "Altitude(m)": 110.1,
+        "DewPoint(\u00b0C)": 27.0,
+        "HeatIndex(\u00b0C)": 41.5
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.35567,
+        "Humidity(%)": 0.049887,
+        "Pressure(hPa)": -0.42412,
+        "Gas (kOhms)": -1.974363,
+        "Altitude(m)": 0.423163,
+        "DewPoint(\u00b0C)": 0.338683,
+        "HeatIndex(\u00b0C)": 0.276519
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.0646558,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.68570495,
+        "UNHEALTHY": 0.0855435,
+        "UNHEALTHY_SENSITIVE": 0.1640957
+      },
+      "predicted_encoded_int": 2,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.064656,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.685705,
+        "UNHEALTHY": 0.085544,
+        "UNHEALTHY_SENSITIVE": 0.164096
+      }
+    },
+    {
+      "index": 755,
+      "true_class": "MODERATE",
+      "predicted_class": "MODERATE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 26.9,
+        "Humidity(%)": 62.9,
+        "Pressure(hPa)": 1002.8,
+        "Gas (kOhms)": 55.7,
+        "Altitude(m)": 87.2,
+        "DewPoint(\u00b0C)": 19.5,
+        "HeatIndex(\u00b0C)": 29.3
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -1.308848,
+        "Humidity(%)": -0.288053,
+        "Pressure(hPa)": 0.026554,
+        "Gas (kOhms)": -2.214464,
+        "Altitude(m)": -0.031778,
+        "DewPoint(\u00b0C)": -1.23754,
+        "HeatIndex(\u00b0C)": -1.299897
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.03477743,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.65187448,
+        "UNHEALTHY": 0.03591666,
+        "UNHEALTHY_SENSITIVE": 0.27743125
+      },
+      "predicted_encoded_int": 2,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.034777,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.651875,
+        "UNHEALTHY": 0.035917,
+        "UNHEALTHY_SENSITIVE": 0.277431
+      }
+    },
+    {
+      "index": 3,
+      "true_class": "UNHEALTHY_SENSITIVE",
+      "predicted_class": "UNHEALTHY_SENSITIVE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.4,
+        "Humidity(%)": 69.4,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 114.4,
+        "Altitude(m)": 58.5,
+        "DewPoint(\u00b0C)": 27.2,
+        "HeatIndex(\u00b0C)": 42.0
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.236776,
+        "Humidity(%)": 0.590592,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": -1.558932,
+        "Altitude(m)": -0.601945,
+        "DewPoint(\u00b0C)": 0.380716,
+        "HeatIndex(\u00b0C)": 0.341126
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.02421071,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.30446607,
+        "UNHEALTHY": 0.10304994,
+        "UNHEALTHY_SENSITIVE": 0.56827319
+      },
+      "predicted_encoded_int": 4,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.024211,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.304466,
+        "UNHEALTHY": 0.10305,
+        "UNHEALTHY_SENSITIVE": 0.568273
+      }
+    },
+    {
+      "index": 4,
+      "true_class": "UNHEALTHY_SENSITIVE",
+      "predicted_class": "MODERATE",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.3,
+        "Humidity(%)": 70.1,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 98.8,
+        "Altitude(m)": 58.8,
+        "DewPoint(\u00b0C)": 27.3,
+        "HeatIndex(\u00b0C)": 42.2
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.212997,
+        "Humidity(%)": 0.685216,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": -1.733145,
+        "Altitude(m)": -0.595985,
+        "DewPoint(\u00b0C)": 0.401732,
+        "HeatIndex(\u00b0C)": 0.366969
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.02572425,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.72464335,
+        "UNHEALTHY": 0.04645644,
+        "UNHEALTHY_SENSITIVE": 0.2031758
+      },
+      "predicted_encoded_int": 2,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.025724,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.724643,
+        "UNHEALTHY": 0.046456,
+        "UNHEALTHY_SENSITIVE": 0.203176
+      }
+    },
+    {
+      "index": 5,
+      "true_class": "UNHEALTHY_SENSITIVE",
+      "predicted_class": "UNHEALTHY_SENSITIVE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.6,
+        "Humidity(%)": 69.1,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 143.5,
+        "Altitude(m)": 58.7,
+        "DewPoint(\u00b0C)": 27.4,
+        "HeatIndex(\u00b0C)": 42.4
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.284334,
+        "Humidity(%)": 0.55004,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": -1.233958,
+        "Altitude(m)": -0.597972,
+        "DewPoint(\u00b0C)": 0.422749,
+        "HeatIndex(\u00b0C)": 0.392812
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00958333,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.19258273,
+        "UNHEALTHY": 0.15679993,
+        "UNHEALTHY_SENSITIVE": 0.64103389
+      },
+      "predicted_encoded_int": 4,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.009583,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.192583,
+        "UNHEALTHY": 0.1568,
+        "UNHEALTHY_SENSITIVE": 0.641034
+      }
+    },
+    {
+      "index": 6,
+      "true_class": "UNHEALTHY_SENSITIVE",
+      "predicted_class": "UNHEALTHY_SENSITIVE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.8,
+        "Humidity(%)": 68.2,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 179.9,
+        "Altitude(m)": 58.6,
+        "DewPoint(\u00b0C)": 27.5,
+        "HeatIndex(\u00b0C)": 42.4
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.331892,
+        "Humidity(%)": 0.428381,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": -0.827462,
+        "Altitude(m)": -0.599958,
+        "DewPoint(\u00b0C)": 0.443765,
+        "HeatIndex(\u00b0C)": 0.392812
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.14350624,
+        "UNHEALTHY": 0.21030284,
+        "UNHEALTHY_SENSITIVE": 0.64119077
+      },
+      "predicted_encoded_int": 4,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.143506,
+        "UNHEALTHY": 0.210303,
+        "UNHEALTHY_SENSITIVE": 0.641191
+      }
+    },
+    {
+      "index": 158,
+      "true_class": "UNHEALTHY_SENSITIVE",
+      "predicted_class": "MODERATE",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.7,
+        "Humidity(%)": 52.9,
+        "Pressure(hPa)": 996.2,
+        "Gas (kOhms)": 108.1,
+        "Altitude(m)": 143.2,
+        "DewPoint(\u00b0C)": 22.3,
+        "HeatIndex(\u00b0C)": 34.1
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.167464,
+        "Humidity(%)": -1.639815,
+        "Pressure(hPa)": -1.075094,
+        "Gas (kOhms)": -1.629287,
+        "Altitude(m)": 1.080742,
+        "DewPoint(\u00b0C)": -0.649083,
+        "HeatIndex(\u00b0C)": -0.679668
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.04241755,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.48472574,
+        "UNHEALTHY": 0.07749999,
+        "UNHEALTHY_SENSITIVE": 0.39535651
+      },
+      "predicted_encoded_int": 2,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.042418,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.484726,
+        "UNHEALTHY": 0.0775,
+        "UNHEALTHY_SENSITIVE": 0.395357
+      }
+    },
+    {
+      "index": 159,
+      "true_class": "UNHEALTHY_SENSITIVE",
+      "predicted_class": "UNHEALTHY_SENSITIVE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.7,
+        "Humidity(%)": 52.8,
+        "Pressure(hPa)": 996.2,
+        "Gas (kOhms)": 123.5,
+        "Altitude(m)": 143.2,
+        "DewPoint(\u00b0C)": 22.3,
+        "HeatIndex(\u00b0C)": 34.1
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.167464,
+        "Humidity(%)": -1.653333,
+        "Pressure(hPa)": -1.075094,
+        "Gas (kOhms)": -1.457308,
+        "Altitude(m)": 1.080742,
+        "DewPoint(\u00b0C)": -0.649083,
+        "HeatIndex(\u00b0C)": -0.679668
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.13280064,
+        "UNHEALTHY": 0.083,
+        "UNHEALTHY_SENSITIVE": 0.77992731
+      },
+      "predicted_encoded_int": 4,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.132801,
+        "UNHEALTHY": 0.083,
+        "UNHEALTHY_SENSITIVE": 0.779928
+      }
+    },
+    {
+      "index": 160,
+      "true_class": "UNHEALTHY_SENSITIVE",
+      "predicted_class": "UNHEALTHY_SENSITIVE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.7,
+        "Humidity(%)": 52.7,
+        "Pressure(hPa)": 996.1,
+        "Gas (kOhms)": 139.9,
+        "Altitude(m)": 143.5,
+        "DewPoint(\u00b0C)": 22.3,
+        "HeatIndex(\u00b0C)": 34.1
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.167464,
+        "Humidity(%)": -1.666851,
+        "Pressure(hPa)": -1.091785,
+        "Gas (kOhms)": -1.274161,
+        "Altitude(m)": 1.086702,
+        "DewPoint(\u00b0C)": -0.649083,
+        "HeatIndex(\u00b0C)": -0.679668
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.04572815,
+        "UNHEALTHY": 0.083,
+        "UNHEALTHY_SENSITIVE": 0.8669998
+      },
+      "predicted_encoded_int": 4,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.045728,
+        "UNHEALTHY": 0.083,
+        "UNHEALTHY_SENSITIVE": 0.867
+      }
+    },
+    {
+      "index": 161,
+      "true_class": "UNHEALTHY_SENSITIVE",
+      "predicted_class": "UNHEALTHY_SENSITIVE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.7,
+        "Humidity(%)": 52.8,
+        "Pressure(hPa)": 996.2,
+        "Gas (kOhms)": 152.4,
+        "Altitude(m)": 143.3,
+        "DewPoint(\u00b0C)": 22.3,
+        "HeatIndex(\u00b0C)": 34.2
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.167464,
+        "Humidity(%)": -1.653333,
+        "Pressure(hPa)": -1.075094,
+        "Gas (kOhms)": -1.134568,
+        "Altitude(m)": 1.082729,
+        "DewPoint(\u00b0C)": -0.649083,
+        "HeatIndex(\u00b0C)": -0.666746
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.03572816,
+        "UNHEALTHY": 0.083,
+        "UNHEALTHY_SENSITIVE": 0.87699986
+      },
+      "predicted_encoded_int": 4,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.035728,
+        "UNHEALTHY": 0.083,
+        "UNHEALTHY_SENSITIVE": 0.877
+      }
+    },
+    {
+      "index": 162,
+      "true_class": "UNHEALTHY_SENSITIVE",
+      "predicted_class": "UNHEALTHY_SENSITIVE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.6,
+        "Humidity(%)": 53.1,
+        "Pressure(hPa)": 996.2,
+        "Gas (kOhms)": 161.2,
+        "Altitude(m)": 143.0,
+        "DewPoint(\u00b0C)": 22.3,
+        "HeatIndex(\u00b0C)": 34.1
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.191243,
+        "Humidity(%)": -1.61278,
+        "Pressure(hPa)": -1.075094,
+        "Gas (kOhms)": -1.036294,
+        "Altitude(m)": 1.076769,
+        "DewPoint(\u00b0C)": -0.649083,
+        "HeatIndex(\u00b0C)": -0.679668
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.03072815,
+        "UNHEALTHY": 0.08466666,
+        "UNHEALTHY_SENSITIVE": 0.88033313
+      },
+      "predicted_encoded_int": 4,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.030728,
+        "UNHEALTHY": 0.084667,
+        "UNHEALTHY_SENSITIVE": 0.880333
+      }
+    },
+    {
+      "index": 163,
+      "true_class": "UNHEALTHY_SENSITIVE",
+      "predicted_class": "UNHEALTHY_SENSITIVE",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.7,
+        "Humidity(%)": 52.9,
+        "Pressure(hPa)": 996.2,
+        "Gas (kOhms)": 176.1,
+        "Altitude(m)": 143.0,
+        "DewPoint(\u00b0C)": 22.2,
+        "HeatIndex(\u00b0C)": 34.1
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.167464,
+        "Humidity(%)": -1.639815,
+        "Pressure(hPa)": -1.075094,
+        "Gas (kOhms)": -0.869898,
+        "Altitude(m)": 1.076769,
+        "DewPoint(\u00b0C)": -0.670099,
+        "HeatIndex(\u00b0C)": -0.679668
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.03572816,
+        "UNHEALTHY": 0.08355555,
+        "UNHEALTHY_SENSITIVE": 0.87644428
+      },
+      "predicted_encoded_int": 4,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.035728,
+        "UNHEALTHY": 0.083556,
+        "UNHEALTHY_SENSITIVE": 0.876444
+      }
+    },
+    {
+      "index": 7,
+      "true_class": "UNHEALTHY",
+      "predicted_class": "UNHEALTHY",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 33.9,
+        "Humidity(%)": 67.7,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 204.5,
+        "Altitude(m)": 58.6,
+        "DewPoint(\u00b0C)": 27.5,
+        "HeatIndex(\u00b0C)": 42.5
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.35567,
+        "Humidity(%)": 0.360793,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": -0.552741,
+        "Altitude(m)": -0.599958,
+        "DewPoint(\u00b0C)": 0.443765,
+        "HeatIndex(\u00b0C)": 0.405733
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.09219038,
+        "UNHEALTHY": 0.73639798,
+        "UNHEALTHY_SENSITIVE": 0.1664115
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.09219,
+        "UNHEALTHY": 0.736398,
+        "UNHEALTHY_SENSITIVE": 0.166411
+      }
+    },
+    {
+      "index": 8,
+      "true_class": "UNHEALTHY",
+      "predicted_class": "UNHEALTHY",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 34.0,
+        "Humidity(%)": 67.4,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 224.9,
+        "Altitude(m)": 58.5,
+        "DewPoint(\u00b0C)": 27.5,
+        "HeatIndex(\u00b0C)": 42.5
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.379449,
+        "Humidity(%)": 0.32024,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": -0.324925,
+        "Altitude(m)": -0.601945,
+        "DewPoint(\u00b0C)": 0.443765,
+        "HeatIndex(\u00b0C)": 0.405733
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.08719038,
+        "UNHEALTHY": 0.84175509,
+        "UNHEALTHY_SENSITIVE": 0.06605434
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.08719,
+        "UNHEALTHY": 0.841755,
+        "UNHEALTHY_SENSITIVE": 0.066054
+      }
+    },
+    {
+      "index": 9,
+      "true_class": "UNHEALTHY",
+      "predicted_class": "UNHEALTHY",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 34.1,
+        "Humidity(%)": 67.1,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 243.0,
+        "Altitude(m)": 58.5,
+        "DewPoint(\u00b0C)": 27.5,
+        "HeatIndex(\u00b0C)": 42.4
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.403228,
+        "Humidity(%)": 0.279687,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": -0.122793,
+        "Altitude(m)": -0.601945,
+        "DewPoint(\u00b0C)": 0.443765,
+        "HeatIndex(\u00b0C)": 0.392812
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.08601391,
+        "UNHEALTHY": 0.84454918,
+        "UNHEALTHY_SENSITIVE": 0.0644367
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.086014,
+        "UNHEALTHY": 0.844549,
+        "UNHEALTHY_SENSITIVE": 0.064437
+      }
+    },
+    {
+      "index": 10,
+      "true_class": "UNHEALTHY",
+      "predicted_class": "UNHEALTHY",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 34.1,
+        "Humidity(%)": 67.0,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 256.8,
+        "Altitude(m)": 58.6,
+        "DewPoint(\u00b0C)": 27.5,
+        "HeatIndex(\u00b0C)": 42.4
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.403228,
+        "Humidity(%)": 0.266169,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": 0.031318,
+        "Altitude(m)": -0.599958,
+        "DewPoint(\u00b0C)": 0.443765,
+        "HeatIndex(\u00b0C)": 0.392812
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.08601391,
+        "UNHEALTHY": 0.84788251,
+        "UNHEALTHY_SENSITIVE": 0.06110337
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.086014,
+        "UNHEALTHY": 0.847883,
+        "UNHEALTHY_SENSITIVE": 0.061103
+      }
+    },
+    {
+      "index": 11,
+      "true_class": "UNHEALTHY",
+      "predicted_class": "UNHEALTHY",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 34.0,
+        "Humidity(%)": 67.1,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 264.0,
+        "Altitude(m)": 58.7,
+        "DewPoint(\u00b0C)": 27.5,
+        "HeatIndex(\u00b0C)": 42.4
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.379449,
+        "Humidity(%)": 0.279687,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": 0.111724,
+        "Altitude(m)": -0.597972,
+        "DewPoint(\u00b0C)": 0.443765,
+        "HeatIndex(\u00b0C)": 0.392812
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.08601391,
+        "UNHEALTHY": 0.8528825,
+        "UNHEALTHY_SENSITIVE": 0.05610337
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.005,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.086014,
+        "UNHEALTHY": 0.852883,
+        "UNHEALTHY_SENSITIVE": 0.056103
+      }
+    },
+    {
+      "index": 12,
+      "true_class": "UNHEALTHY",
+      "predicted_class": "UNHEALTHY",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 34.0,
+        "Humidity(%)": 66.9,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 276.6,
+        "Altitude(m)": 58.8,
+        "DewPoint(\u00b0C)": 27.4,
+        "HeatIndex(\u00b0C)": 42.4
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.379449,
+        "Humidity(%)": 0.252652,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": 0.252434,
+        "Altitude(m)": -0.595985,
+        "DewPoint(\u00b0C)": 0.422749,
+        "HeatIndex(\u00b0C)": 0.392812
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00958333,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.08601391,
+        "UNHEALTHY": 0.84929919,
+        "UNHEALTHY_SENSITIVE": 0.05510337
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.009583,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.086014,
+        "UNHEALTHY": 0.849299,
+        "UNHEALTHY_SENSITIVE": 0.055103
+      }
+    },
+    {
+      "index": 13,
+      "true_class": "UNHEALTHY",
+      "predicted_class": "UNHEALTHY",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 34.1,
+        "Humidity(%)": 66.8,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 287.5,
+        "Altitude(m)": 58.8,
+        "DewPoint(\u00b0C)": 27.4,
+        "HeatIndex(\u00b0C)": 42.3
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.403228,
+        "Humidity(%)": 0.239134,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": 0.37416,
+        "Altitude(m)": -0.595985,
+        "DewPoint(\u00b0C)": 0.422749,
+        "HeatIndex(\u00b0C)": 0.37989
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00958333,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.08601391,
+        "UNHEALTHY": 0.84929919,
+        "UNHEALTHY_SENSITIVE": 0.05510337
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.009583,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.086014,
+        "UNHEALTHY": 0.849299,
+        "UNHEALTHY_SENSITIVE": 0.055103
+      }
+    },
+    {
+      "index": 14,
+      "true_class": "UNHEALTHY",
+      "predicted_class": "UNHEALTHY",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 34.1,
+        "Humidity(%)": 66.8,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 294.2,
+        "Altitude(m)": 58.8,
+        "DewPoint(\u00b0C)": 27.4,
+        "HeatIndex(\u00b0C)": 42.3
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.403228,
+        "Humidity(%)": 0.239134,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": 0.448982,
+        "Altitude(m)": -0.595985,
+        "DewPoint(\u00b0C)": 0.422749,
+        "HeatIndex(\u00b0C)": 0.37989
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00958333,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.08601391,
+        "UNHEALTHY": 0.84929919,
+        "UNHEALTHY_SENSITIVE": 0.05510337
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.009583,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.086014,
+        "UNHEALTHY": 0.849299,
+        "UNHEALTHY_SENSITIVE": 0.055103
+      }
+    },
+    {
+      "index": 15,
+      "true_class": "UNHEALTHY",
+      "predicted_class": "UNHEALTHY",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 34.1,
+        "Humidity(%)": 66.7,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 304.8,
+        "Altitude(m)": 58.9,
+        "DewPoint(\u00b0C)": 27.4,
+        "HeatIndex(\u00b0C)": 42.3
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.403228,
+        "Humidity(%)": 0.225617,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": 0.567358,
+        "Altitude(m)": -0.593998,
+        "DewPoint(\u00b0C)": 0.422749,
+        "HeatIndex(\u00b0C)": 0.37989
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00958333,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.08601391,
+        "UNHEALTHY": 0.84929919,
+        "UNHEALTHY_SENSITIVE": 0.05510337
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.009583,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.086014,
+        "UNHEALTHY": 0.849299,
+        "UNHEALTHY_SENSITIVE": 0.055103
+      }
+    },
+    {
+      "index": 16,
+      "true_class": "UNHEALTHY",
+      "predicted_class": "UNHEALTHY",
+      "correct": true,
+      "raw_features": {
+        "Temperature(\u00b0C)": 34.1,
+        "Humidity(%)": 66.7,
+        "Pressure(hPa)": 1006.2,
+        "Gas (kOhms)": 311.7,
+        "Altitude(m)": 59.0,
+        "DewPoint(\u00b0C)": 27.4,
+        "HeatIndex(\u00b0C)": 42.3
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": 0.403228,
+        "Humidity(%)": 0.225617,
+        "Pressure(hPa)": 0.59407,
+        "Gas (kOhms)": 0.644413,
+        "Altitude(m)": -0.592012,
+        "DewPoint(\u00b0C)": 0.422749,
+        "HeatIndex(\u00b0C)": 0.37989
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00958333,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.08601391,
+        "UNHEALTHY": 0.84929919,
+        "UNHEALTHY_SENSITIVE": 0.05510337
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.009583,
+        "HAZARDOUS": 0.0,
+        "MODERATE": 0.086014,
+        "UNHEALTHY": 0.849299,
+        "UNHEALTHY_SENSITIVE": 0.055103
+      }
+    },
+    {
+      "index": 275,
+      "true_class": "HAZARDOUS",
+      "predicted_class": "UNHEALTHY",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.5,
+        "Humidity(%)": 52.8,
+        "Pressure(hPa)": 996.0,
+        "Gas (kOhms)": 478.1,
+        "Altitude(m)": 144.6,
+        "DewPoint(\u00b0C)": 22.0,
+        "HeatIndex(\u00b0C)": 33.8
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.215022,
+        "Humidity(%)": -1.653333,
+        "Pressure(hPa)": -1.108477,
+        "Gas (kOhms)": 2.502683,
+        "Altitude(m)": 1.108555,
+        "DewPoint(\u00b0C)": -0.712132,
+        "HeatIndex(\u00b0C)": -0.718432
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.0092619,
+        "MODERATE": 0.03072815,
+        "UNHEALTHY": 0.55129349,
+        "UNHEALTHY_SENSITIVE": 0.40444431
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.009262,
+        "MODERATE": 0.030728,
+        "UNHEALTHY": 0.551294,
+        "UNHEALTHY_SENSITIVE": 0.404444
+      }
+    },
+    {
+      "index": 277,
+      "true_class": "HAZARDOUS",
+      "predicted_class": "UNHEALTHY",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.4,
+        "Humidity(%)": 53.0,
+        "Pressure(hPa)": 996.0,
+        "Gas (kOhms)": 486.1,
+        "Altitude(m)": 144.9,
+        "DewPoint(\u00b0C)": 22.0,
+        "HeatIndex(\u00b0C)": 33.8
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.2388,
+        "Humidity(%)": -1.626298,
+        "Pressure(hPa)": -1.108477,
+        "Gas (kOhms)": 2.592023,
+        "Altitude(m)": 1.114515,
+        "DewPoint(\u00b0C)": -0.712132,
+        "HeatIndex(\u00b0C)": -0.718432
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.34094766,
+        "MODERATE": 0.02072815,
+        "UNHEALTHY": 0.36002451,
+        "UNHEALTHY_SENSITIVE": 0.27402771
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.340948,
+        "MODERATE": 0.020728,
+        "UNHEALTHY": 0.360025,
+        "UNHEALTHY_SENSITIVE": 0.274028
+      }
+    },
+    {
+      "index": 278,
+      "true_class": "HAZARDOUS",
+      "predicted_class": "UNHEALTHY",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.4,
+        "Humidity(%)": 53.1,
+        "Pressure(hPa)": 996.0,
+        "Gas (kOhms)": 479.5,
+        "Altitude(m)": 145.0,
+        "DewPoint(\u00b0C)": 22.1,
+        "HeatIndex(\u00b0C)": 33.8
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.2388,
+        "Humidity(%)": -1.61278,
+        "Pressure(hPa)": -1.108477,
+        "Gas (kOhms)": 2.518318,
+        "Altitude(m)": 1.116502,
+        "DewPoint(\u00b0C)": -0.691116,
+        "HeatIndex(\u00b0C)": -0.718432
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.014018,
+        "MODERATE": 0.03072815,
+        "UNHEALTHY": 0.53987074,
+        "UNHEALTHY_SENSITIVE": 0.411111
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.014018,
+        "MODERATE": 0.030728,
+        "UNHEALTHY": 0.539871,
+        "UNHEALTHY_SENSITIVE": 0.411111
+      }
+    },
+    {
+      "index": 279,
+      "true_class": "HAZARDOUS",
+      "predicted_class": "UNHEALTHY",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.5,
+        "Humidity(%)": 53.0,
+        "Pressure(hPa)": 996.0,
+        "Gas (kOhms)": 485.4,
+        "Altitude(m)": 144.7,
+        "DewPoint(\u00b0C)": 22.0,
+        "HeatIndex(\u00b0C)": 33.8
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.215022,
+        "Humidity(%)": -1.626298,
+        "Pressure(hPa)": -1.108477,
+        "Gas (kOhms)": 2.584206,
+        "Altitude(m)": 1.110542,
+        "DewPoint(\u00b0C)": -0.712132,
+        "HeatIndex(\u00b0C)": -0.718432
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.24213839,
+        "MODERATE": 0.02072815,
+        "UNHEALTHY": 0.46383378,
+        "UNHEALTHY_SENSITIVE": 0.26902774
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.242138,
+        "MODERATE": 0.020728,
+        "UNHEALTHY": 0.463834,
+        "UNHEALTHY_SENSITIVE": 0.269028
+      }
+    },
+    {
+      "index": 280,
+      "true_class": "HAZARDOUS",
+      "predicted_class": "UNHEALTHY",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.5,
+        "Humidity(%)": 52.9,
+        "Pressure(hPa)": 996.0,
+        "Gas (kOhms)": 486.1,
+        "Altitude(m)": 144.5,
+        "DewPoint(\u00b0C)": 22.0,
+        "HeatIndex(\u00b0C)": 33.8
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.215022,
+        "Humidity(%)": -1.639815,
+        "Pressure(hPa)": -1.108477,
+        "Gas (kOhms)": 2.592023,
+        "Altitude(m)": 1.106569,
+        "DewPoint(\u00b0C)": -0.712132,
+        "HeatIndex(\u00b0C)": -0.718432
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.34094766,
+        "MODERATE": 0.02072815,
+        "UNHEALTHY": 0.36502451,
+        "UNHEALTHY_SENSITIVE": 0.26902774
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.340948,
+        "MODERATE": 0.020728,
+        "UNHEALTHY": 0.365025,
+        "UNHEALTHY_SENSITIVE": 0.269028
+      }
+    },
+    {
+      "index": 281,
+      "true_class": "HAZARDOUS",
+      "predicted_class": "UNHEALTHY",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.5,
+        "Humidity(%)": 52.8,
+        "Pressure(hPa)": 996.0,
+        "Gas (kOhms)": 494.3,
+        "Altitude(m)": 144.5,
+        "DewPoint(\u00b0C)": 22.1,
+        "HeatIndex(\u00b0C)": 33.8
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.215022,
+        "Humidity(%)": -1.653333,
+        "Pressure(hPa)": -1.108477,
+        "Gas (kOhms)": 2.683596,
+        "Altitude(m)": 1.106569,
+        "DewPoint(\u00b0C)": -0.691116,
+        "HeatIndex(\u00b0C)": -0.718432
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.34902054,
+        "MODERATE": 0.02072815,
+        "UNHEALTHY": 0.35695159,
+        "UNHEALTHY_SENSITIVE": 0.26902774
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.349021,
+        "MODERATE": 0.020728,
+        "UNHEALTHY": 0.356952,
+        "UNHEALTHY_SENSITIVE": 0.269028
+      }
+    },
+    {
+      "index": 282,
+      "true_class": "HAZARDOUS",
+      "predicted_class": "UNHEALTHY",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.4,
+        "Humidity(%)": 53.0,
+        "Pressure(hPa)": 996.0,
+        "Gas (kOhms)": 484.7,
+        "Altitude(m)": 144.3,
+        "DewPoint(\u00b0C)": 22.1,
+        "HeatIndex(\u00b0C)": 33.8
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.2388,
+        "Humidity(%)": -1.626298,
+        "Pressure(hPa)": -1.108477,
+        "Gas (kOhms)": 2.576389,
+        "Altitude(m)": 1.102595,
+        "DewPoint(\u00b0C)": -0.691116,
+        "HeatIndex(\u00b0C)": -0.718432
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.1825034,
+        "MODERATE": 0.02072815,
+        "UNHEALTHY": 0.50846875,
+        "UNHEALTHY_SENSITIVE": 0.2840277
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.182503,
+        "MODERATE": 0.020728,
+        "UNHEALTHY": 0.508469,
+        "UNHEALTHY_SENSITIVE": 0.284028
+      }
+    },
+    {
+      "index": 283,
+      "true_class": "HAZARDOUS",
+      "predicted_class": "UNHEALTHY",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.5,
+        "Humidity(%)": 52.8,
+        "Pressure(hPa)": 996.0,
+        "Gas (kOhms)": 495.8,
+        "Altitude(m)": 144.4,
+        "DewPoint(\u00b0C)": 22.1,
+        "HeatIndex(\u00b0C)": 33.8
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.215022,
+        "Humidity(%)": -1.653333,
+        "Pressure(hPa)": -1.108477,
+        "Gas (kOhms)": 2.700348,
+        "Altitude(m)": 1.104582,
+        "DewPoint(\u00b0C)": -0.691116,
+        "HeatIndex(\u00b0C)": -0.718432
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.34902054,
+        "MODERATE": 0.02072815,
+        "UNHEALTHY": 0.3519516,
+        "UNHEALTHY_SENSITIVE": 0.27402771
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.349021,
+        "MODERATE": 0.020728,
+        "UNHEALTHY": 0.351952,
+        "UNHEALTHY_SENSITIVE": 0.274028
+      }
+    },
+    {
+      "index": 284,
+      "true_class": "HAZARDOUS",
+      "predicted_class": "UNHEALTHY",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.5,
+        "Humidity(%)": 52.9,
+        "Pressure(hPa)": 996.0,
+        "Gas (kOhms)": 501.7,
+        "Altitude(m)": 144.4,
+        "DewPoint(\u00b0C)": 22.1,
+        "HeatIndex(\u00b0C)": 33.8
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.215022,
+        "Humidity(%)": -1.639815,
+        "Pressure(hPa)": -1.108477,
+        "Gas (kOhms)": 2.766236,
+        "Altitude(m)": 1.104582,
+        "DewPoint(\u00b0C)": -0.691116,
+        "HeatIndex(\u00b0C)": -0.718432
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.34902054,
+        "MODERATE": 0.02072815,
+        "UNHEALTHY": 0.3519516,
+        "UNHEALTHY_SENSITIVE": 0.27402771
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.349021,
+        "MODERATE": 0.020728,
+        "UNHEALTHY": 0.351952,
+        "UNHEALTHY_SENSITIVE": 0.274028
+      }
+    },
+    {
+      "index": 285,
+      "true_class": "HAZARDOUS",
+      "predicted_class": "UNHEALTHY",
+      "correct": false,
+      "raw_features": {
+        "Temperature(\u00b0C)": 31.5,
+        "Humidity(%)": 52.9,
+        "Pressure(hPa)": 996.0,
+        "Gas (kOhms)": 494.0,
+        "Altitude(m)": 144.6,
+        "DewPoint(\u00b0C)": 22.0,
+        "HeatIndex(\u00b0C)": 33.8
+      },
+      "scaled_features": {
+        "Temperature(\u00b0C)": -0.215022,
+        "Humidity(%)": -1.639815,
+        "Pressure(hPa)": -1.108477,
+        "Gas (kOhms)": 2.680246,
+        "Altitude(m)": 1.108555,
+        "DewPoint(\u00b0C)": -0.712132,
+        "HeatIndex(\u00b0C)": -0.718432
+      },
+      "probabilities_by_encoded_int": {
+        "GOOD": 0.00427184,
+        "HAZARDOUS": 0.34902054,
+        "MODERATE": 0.02072815,
+        "UNHEALTHY": 0.35695159,
+        "UNHEALTHY_SENSITIVE": 0.26902774
+      },
+      "predicted_encoded_int": 3,
+      "probabilities_by_encoded_int_opset22": {
+        "GOOD": 0.004272,
+        "HAZARDOUS": 0.349021,
+        "MODERATE": 0.020728,
+        "UNHEALTHY": 0.356952,
+        "UNHEALTHY_SENSITIVE": 0.269028
+      }
+    }
+  ],
+  "onnx_probabilities_source": "opset-17 ZipMap=False (audit_model_c_opset17.onnx)"
+}

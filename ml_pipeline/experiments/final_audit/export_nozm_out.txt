@@ -1,0 +1,17 @@
+ONNX (ZipMap=False) saved: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\audit_model_c_nozipmap.onnx
+Size: 3.09 MB
+
+Outputs:
+  label: tensor(int64)
+  probabilities: tensor(float)
+
+782-sample verification (ZipMap=False):
+  Label agreement: 782/782 (100.00%)
+  Max proba diff : 4.17e-07
+  Proba shape    : (782, 5)
+  Label dtype    : int64
+  Proba dtype    : float32
+  ONNX class order (index -> class): [np.str_('GOOD'), np.str_('HAZARDOUS'), np.str_('MODERATE'), np.str_('UNHEALTHY'), np.str_('UNHEALTHY_SENSITIVE')]
+
+Deployed to assets: c:\Users\ADMIN\AppData\AirGuardAI\app\src\main\assets\airguard_model.onnx (3.09 MB)
+EXPORT_VERIFIED_OK

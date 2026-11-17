@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\inspect_model.py", line 157, in <module>
+    vote_counts = np.bincount(tree_preds, minlength=clf.n_classes_)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Cannot cast array data from dtype('float64') to dtype('int64') according to the rule 'safe'

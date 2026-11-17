@@ -1,0 +1,208 @@
+========================================================================
+STEP 1: Reconstruct test set from original CSV
+========================================================================
+Test rows: 782  (expected 782)
+Test date range: 2026-06-01  ->  2026-08-25
+Test class distribution:
+  GOOD                      : 8
+  MODERATE                  : 11
+  UNHEALTHY_SENSITIVE       : 25
+  UNHEALTHY                 : 616
+  VERY_UNHEALTHY            : 0
+  HAZARDOUS                 : 122
+
+========================================================================
+STEP 2: Load model + scaler; generate y_true and y_pred
+========================================================================
+Model loaded : c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\audit_model_c.pkl
+Scaler loaded: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\audit_scaler.pkl
+Model type   : RandomForestClassifier
+n_estimators : 200
+class_weight : balanced
+random_state : 42
+
+Model clf.classes_ (internal integer labels): [0 1 2 3 4]
+NOTE: These are LabelEncoder-encoded integers, NOT string class names.
+The decode mapping (from final_audit label encoder) is:
+  LabelEncoder.classes_ (alphabetical): [np.str_('GOOD'), np.str_('HAZARDOUS'), np.str_('MODERATE'), np.str_('UNHEALTHY'), np.str_('UNHEALTHY_SENSITIVE'), np.str_('VERY_UNHEALTHY')]
+    integer 0  ->  GOOD
+    integer 1  ->  HAZARDOUS
+    integer 2  ->  MODERATE
+    integer 3  ->  UNHEALTHY
+    integer 4  ->  UNHEALTHY_SENSITIVE
+    integer 5  ->  VERY_UNHEALTHY
+
+y_true unique string values: ['GOOD', 'HAZARDOUS', 'MODERATE', 'UNHEALTHY', 'UNHEALTHY_SENSITIVE']
+y_pred unique string values: [np.str_('GOOD'), np.str_('HAZARDOUS'), np.str_('MODERATE'), np.str_('UNHEALTHY'), np.str_('UNHEALTHY_SENSITIVE')]
+Total samples: 782
+
+========================================================================
+STEP 3: Metrics from string y_true / y_pred with CANONICAL labels
+========================================================================
+Canonical class order: ['GOOD', 'MODERATE', 'UNHEALTHY_SENSITIVE', 'UNHEALTHY', 'VERY_UNHEALTHY', 'HAZARDOUS']
+
+Overall metrics:
+  Accuracy        : 0.90537084  (90.537084%)
+  Macro Precision : 0.71648595
+  Macro Recall    : 0.71131786
+  Macro F1        : 0.69656969
+  Weighted F1     : 0.89463595
+
+========================================================================
+STEP 4: Confusion matrix (labels=CANONICAL)
+========================================================================
+Rows = Actual, Columns = Predicted
+                                    GOOD    MODERATE    UNHEALTH    UNHEALTH    VERY_UNH    HAZARDOU
+----------------------------------------------------------------------------------------------------
+GOOD                                   8           0           0           0           0           0
+MODERATE                               1          10           0           0           0           0
+UNHEALTHY_SENSITIVE                    0           3          22           0           0           0
+UNHEALTHY                              0           0           8         608           0           0
+VERY_UNHEALTHY                         0           0           0           0           0           0
+HAZARDOUS                              0           0           0          62           0          60
+
+Row sums (= support per class):
+  GOOD                        : row_sum=    8  expected=    8  OK
+  MODERATE                    : row_sum=   11  expected=   11  OK
+  UNHEALTHY_SENSITIVE         : row_sum=   25  expected=   25  OK
+  UNHEALTHY                   : row_sum=  616  expected=  616  OK
+  VERY_UNHEALTHY              : row_sum=    0  expected=    0  OK
+  HAZARDOUS                   : row_sum=  122  expected=  122  OK
+
+Column sums (= predicted count per class):
+  GOOD                        : col_sum=    9  predicted=    9  OK
+  MODERATE                    : col_sum=   13  predicted=   13  OK
+  UNHEALTHY_SENSITIVE         : col_sum=   30  predicted=   30  OK
+  UNHEALTHY                   : col_sum=  670  predicted=  670  OK
+  VERY_UNHEALTHY              : col_sum=    0  predicted=    0  OK
+  HAZARDOUS                   : col_sum=   60  predicted=   60  OK
+
+Diagonal sum / total = 708 / 782 = 0.90537084
+accuracy_score       =                       0.90537084
+Match: YES
+
+========================================================================
+STEP 5: Per-class metrics derived directly from confusion matrix
+========================================================================
+Class                           TP    FP    FN      Prec    Recall        F1   Supp
+------------------------------------------------------------------------------
+GOOD                             8     1     0  0.888889  1.000000  0.941176      8
+MODERATE                        10     3     1  0.769231  0.909091  0.833333     11
+UNHEALTHY_SENSITIVE             22     8     3  0.733333  0.880000  0.800000     25
+UNHEALTHY                      608    62     8  0.907463  0.987013  0.945568    616
+VERY_UNHEALTHY                   0     0     0  0.000000  0.000000  0.000000      0
+HAZARDOUS                       60     0    62  1.000000  0.491803  0.659341    122
+
+Sum of 6 F1 scores        : 4.17941811
+Manual macro-F1 (sum/6)   : 0.69656969
+sklearn macro-F1 (Step 3) : 0.69656969
+Match: YES
+
+========================================================================
+STEP 6: sklearn classification_report (canonical order, zero_division=0)
+========================================================================
+                     precision    recall  f1-score   support
+
+               GOOD   0.888889  1.000000  0.941176         8
+           MODERATE   0.769231  0.909091  0.833333        11
+UNHEALTHY_SENSITIVE   0.733333  0.880000  0.800000        25
+          UNHEALTHY   0.907463  0.987013  0.945568       616
+     VERY_UNHEALTHY   0.000000  0.000000  0.000000         0
+          HAZARDOUS   1.000000  0.491803  0.659341       122
+
+           accuracy                       0.905371       782
+          macro avg   0.716486  0.711318  0.696570       782
+       weighted avg   0.914198  0.905371  0.894636       782
+
+
+========================================================================
+STEP 7: Root-cause analysis of earlier confusion matrix error
+========================================================================
+
+The final audit script (reproduce_audit.py) used LabelEncoder to encode string
+labels to integers 0-5. LabelEncoder.fit(['GOOD','MODERATE','UNHEALTHY_SENSITIVE',
+'UNHEALTHY','VERY_UNHEALTHY','HAZARDOUS']) sorts ALPHABETICALLY, giving:
+  0 -> GOOD
+  1 -> HAZARDOUS          <-- NOT index 5
+  2 -> MODERATE
+  3 -> UNHEALTHY
+  4 -> UNHEALTHY_SENSITIVE
+  5 -> VERY_UNHEALTHY     <-- NOT index 4
+
+The confusion matrix was built using:
+  confusion_matrix(y_test_enc, y_pred_enc, labels=[0,1,2,3,4,5])
+So the matrix rows/columns were in LabelEncoder alphabetical order:
+  Row 0 = GOOD, Row 1 = HAZARDOUS, Row 2 = MODERATE, Row 3 = UNHEALTHY,
+  Row 4 = UNHEALTHY_SENSITIVE, Row 5 = VERY_UNHEALTHY
+
+But the display loop printed them as:
+  Row 0 = GOOD, Row 1 = MODERATE, Row 2 = UNHEALTHY_SENSITIVE,
+  Row 3 = UNHEALTHY, Row 4 = VERY_UNHEALTHY, Row 5 = HAZARDOUS
+(canonical order, different from LabelEncoder order)
+
+This caused HAZARDOUS row (LabelEncoder index 1) to be DISPLAYED as MODERATE,
+and the VERY_UNHEALTHY row (index 5) to be displayed as HAZARDOUS.
+
+Consequence: the saved confusion_matrix.csv had CORRECT class-name row labels
+(written from the cm numpy array rows in LabelEncoder order mapped to string names),
+but the display printed in the audit report showed MODERATE with support=122
+(which was actually HAZARDOUS), making the per-class F1 calculations look wrong.
+
+The METRICS (accuracy, macro-F1, HAZARDOUS precision/recall) were computed
+correctly in Step 3 using sklearn functions with explicit labels=[0..5], which
+maps correctly through LabelEncoder. Only the displayed per-class breakdown
+and the saved confusion_matrix.csv were affected by the label-ordering mismatch.
+
+
+========================================================================
+STEP 8: Save corrected artifacts
+========================================================================
+Confusion matrix CSV: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\corrected_metrics\confusion_matrix_corrected.csv
+Classification report: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\corrected_metrics\classification_report_corrected.txt
+Metrics JSON: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\corrected_metrics\corrected_metrics.json
+
+========================================================================
+FINAL SUMMARY
+========================================================================
+
+1. WHICH PREVIOUS METRIC WAS INCORRECT?
+   The aggregate metrics (accuracy, macro-F1, HAZARDOUS precision/recall)
+   were computed correctly by sklearn in the final audit. They are unchanged.
+   What was WRONG: the printed per-class breakdown and the saved
+   confusion_matrix.csv had their row labels in LabelEncoder alphabetical
+   order, displayed as if they were in canonical order. This made the
+   HAZARDOUS row appear as MODERATE (and vice versa for display purposes).
+
+2. CORRECT SIX-CLASS MACRO-F1: 0.696570
+
+3. CORRECT PER-CLASS METRICS:
+   Class                            Prec   Recall       F1   Supp
+   --------------------------------------------------------------
+   GOOD                           0.8889   1.0000   0.9412      8
+   MODERATE                       0.7692   0.9091   0.8333     11
+   UNHEALTHY_SENSITIVE            0.7333   0.8800   0.8000     25
+   UNHEALTHY                      0.9075   0.9870   0.9456    616
+   VERY_UNHEALTHY                 0.0000   0.0000   0.0000      0
+   HAZARDOUS                      1.0000   0.4918   0.6593    122
+
+4. CORRECTED CONFUSION MATRIX (rows=actual, cols=predicted):
+                                     GOOD  MODERATE  UNHEALTH  UNHEALTH  VERY_UNH  HAZARDOU
+   GOOD                                 8         0         0         0         0         0
+   MODERATE                             1        10         0         0         0         0
+   UNHEALTHY_SENSITIVE                  0         3        22         0         0         0
+   UNHEALTHY                            0         0         8       608         0         0
+   VERY_UNHEALTHY                       0         0         0         0         0         0
+   HAZARDOUS                            0         0         0        62         0        60
+
+5. ACCURACY AND HAZARDOUS RECALL:
+   Accuracy         : 0.905371 (90.5371%)  UNCHANGED
+   HAZARDOUS recall : 0.491803 (49.18%)  UNCHANGED
+   HAZARDOUS prec   : 1.000000  UNCHANGED
+
+6. ROOT CAUSE:
+   LabelEncoder sorted classes alphabetically (HAZARDOUS=1, not 5).
+   The confusion matrix was stored in that alphabetical order but
+   displayed/labelled in canonical order — causing a row-label swap.
+   Fixing required working entirely in string label space (this script).
+
+Done.

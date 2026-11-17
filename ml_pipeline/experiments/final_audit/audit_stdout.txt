@@ -1,0 +1,247 @@
+======================================================================
+SECTION 1: DATASET VERIFICATION
+======================================================================
+Raw rows loaded              : 19896
+Rows with missing Date/Time  : 104
+Duplicate rows removed       : 2
+NaN-feature rows removed     : 0
+Rows after feature cleaning  : 19894
+Rows with unparseable datetime: 104
+Final valid unique records   : 19790
+
+Expected final count: 19790
+Actual final count : 19790
+Status: MATCH
+
+Full dataset class counts (all 19790 rows):
+  GOOD                      :     135  (0.682%)
+  MODERATE                  :     422  (2.132%)
+  UNHEALTHY_SENSITIVE       :    5875  (29.687%)
+  UNHEALTHY                 :   12998  (65.680%)
+  VERY_UNHEALTHY            :       0  (0.000%)
+  HAZARDOUS                 :     360  (1.819%)
+  TOTAL                     :   19790
+  Sum matches 19790: YES
+
+Note on threshold interpretation:
+  The previous step1 script used '<= 20 GOOD, <= 40 MODERATE' etc.
+  This script uses the same thresholds. Any count difference arises
+  from whether rows with unparseable datetime were included before
+  or after label derivation. This audit derives labels after all
+  cleaning, on the final 19790 rows only.
+
+AQI unique values in dataset (sorted):
+  [np.int64(10), np.int64(20), np.int64(40), np.int64(60), np.int64(80), np.int64(100)]
+
+AQI values in range (80, 90]: []
+Rows with AQI in (80, 90]  : 0
+VERY_UNHEALTHY samples: 0 (confirmed)
+
+======================================================================
+SECTION 2: CHRONOLOGICAL SPLIT VERIFICATION
+======================================================================
+Cutoff date               : 2026-06-01
+Training rows             : 19008
+Testing rows              : 782
+Train + Test              : 19790  (should equal 19790)
+Date overlap between sets : 0  [CLEAN]
+Train date range          : 2025-07-26  ->  2026-05-31
+Test  date range          : 2026-06-01  ->  2026-08-25
+
+Train class distribution:
+  GOOD                      :     127
+  MODERATE                  :     411
+  UNHEALTHY_SENSITIVE       :    5850
+  UNHEALTHY                 :   12382
+  VERY_UNHEALTHY            :       0
+  HAZARDOUS                 :     238
+
+Test class distribution:
+  GOOD                      :       8
+  MODERATE                  :      11
+  UNHEALTHY_SENSITIVE       :      25
+  UNHEALTHY                 :     616
+  VERY_UNHEALTHY            :       0
+  HAZARDOUS                 :     122
+
+Verification checks:
+  [PASS] Training rows == 19008
+  [PASS] Testing rows == 782
+  [PASS] Train HAZARDOUS == 238
+  [PASS] Test  HAZARDOUS == 122
+
+All checks passed: True
+
+======================================================================
+SECTION 3: MODEL C REPRODUCTION (RF class_weight='balanced')
+======================================================================
+Hyperparameters: {'n_estimators': 200, 'max_depth': None, 'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'class_weight': 'balanced', 'random_state': 42, 'n_jobs': -1}
+
+LabelEncoder fitted on all 6 classes:
+  0 -> GOOD
+  1 -> HAZARDOUS
+  2 -> MODERATE
+  3 -> UNHEALTHY
+  4 -> UNHEALTHY_SENSITIVE
+  5 -> VERY_UNHEALTHY
+
+Fitting StandardScaler on training data only...
+Scaler parameters (fitted on training data):
+  Temperature(°C)             mean=   32.404256  scale=    4.205421
+  Humidity(%)                 mean=   65.030945  scale=    7.397750
+  Pressure(hPa)               mean= 1002.640914  scale=    5.991025
+  Gas (kOhms)                 mean=  253.995597  scale=   89.545656
+  Altitude(m)                 mean=   88.799590  scale=   50.336149
+  DewPoint(°C)                mean=   25.388473  scale=    4.758210
+  HeatIndex(°C)               mean=   39.360001  scale=    7.739075
+
+Training RandomForestClassifier (random_state=42)...
+Training complete.
+
+REPRODUCED METRICS:
+  Accuracy        : 0.905371  (90.5371%)
+  Macro Precision : 0.716486
+  Macro Recall    : 0.711318
+  Macro F1        : 0.696570
+  Weighted F1     : 0.894636
+
+  HAZARDOUS support: 122
+  HAZARDOUS TP: 60  FP: 0  FN: 62
+  HAZARDOUS Precision: 1.000000
+  HAZARDOUS Recall   : 0.491803
+
+MATCH CHECK vs previously reported results:
+  accuracy          : prev=0.9054  reproduced=0.9054  [MATCH]
+  macro_f1          : prev=0.6966  reproduced=0.6966  [MATCH]
+  haz_recall        : prev=0.4918  reproduced=0.4918  [MATCH]
+  haz_prec          : prev=1.0000  reproduced=1.0000  [MATCH]
+
+All within tolerance: True
+
+======================================================================
+SECTION 4: FULL 6x6 CONFUSION MATRIX
+======================================================================
+Rows = Actual class, Columns = Predicted class
+
+                                    GOOD    MODERATE    UNHEALTH    UNHEALTH    VERY_UNH    HAZARDOU
+----------------------------------------------------------------------------------------------------
+GOOD                                   8           0           0           0           0           0
+MODERATE                               0          60           0          62           0           0
+UNHEALTHY_SENSITIVE                    1           0          10           0           0           0
+UNHEALTHY                              0           0           0         608           8           0
+VERY_UNHEALTHY                         0           0           3           0          22           0
+HAZARDOUS                              0           0           0           0           0           0
+
+Per-class metrics (all 6 classes, zero_division=0):
+Class                              Prec     Recall         F1    Support
+----------------------------------------------------------------------
+GOOD                             0.8889     1.0000     0.9412          8
+MODERATE                         1.0000     0.4918     0.6593        122
+UNHEALTHY_SENSITIVE              0.7692     0.9091     0.8333         11
+UNHEALTHY                        0.9075     0.9870     0.9456        616
+VERY_UNHEALTHY                   0.7333     0.8800     0.8000         25
+HAZARDOUS                        0.0000     0.0000     0.0000          0
+
+Full sklearn classification_report (labels=all 6 indices):
+                     precision    recall  f1-score   support
+
+               GOOD       0.89      1.00      0.94         8
+          HAZARDOUS       1.00      0.49      0.66       122
+           MODERATE       0.77      0.91      0.83        11
+          UNHEALTHY       0.91      0.99      0.95       616
+UNHEALTHY_SENSITIVE       0.73      0.88      0.80        25
+     VERY_UNHEALTHY       0.00      0.00      0.00         0
+
+           accuracy                           0.91       782
+          macro avg       0.72      0.71      0.70       782
+       weighted avg       0.91      0.91      0.89       782
+
+
+======================================================================
+SECTION 5: VERY_UNHEALTHY LIMITATION
+======================================================================
+Rows with AQI in (80, 90]: 0
+AQI unique values observed: [np.int64(10), np.int64(20), np.int64(40), np.int64(60), np.int64(80), np.int64(100)]
+
+FINDING: The observed dataset of 19,790 valid records contains zero
+samples with AQI in the range (80, 90]. The VERY_UNHEALTHY class
+(defined as AQI in this range) has no representation in this data.
+No claim is made about sensor hardware capabilities beyond what is
+directly observed in this dataset.
+
+Recommended paper disclosure:
+  'The dataset of 19,790 valid sensor readings contains no observations
+  with AQI values in the range 81-90 (the VERY_UNHEALTHY category).
+  As a result, the trained model cannot recognise VERY_UNHEALTHY air
+  quality conditions, and this class is excluded from all performance
+  metrics with a support of zero.'
+
+======================================================================
+SECTION 6: SAVING REPRODUCIBILITY ARTIFACTS
+======================================================================
+Model saved    : c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\audit_model_c.pkl
+Scaler saved   : c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\audit_scaler.pkl
+LabelEnc saved : c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\audit_label_encoder.pkl
+Confusion matrix CSV: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\confusion_matrix.csv
+Feature importances: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\feature_importances.csv
+
+Feature importances:
+  Gas (kOhms)               : 0.541908
+  Humidity(%)               : 0.124538
+  Altitude(m)               : 0.085349
+  Pressure(hPa)             : 0.071816
+  Temperature(°C)           : 0.065123
+  DewPoint(°C)              : 0.056730
+  HeatIndex(°C)             : 0.054536
+  Sum: 1.000000
+Config JSON saved: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\audit_config.json
+Summary report   : c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\audit_report.txt
+
+======================================================================
+SECTION 7: FINAL VERDICT
+======================================================================
+
+1. Are the new results reproducible?
+   YES — all metrics within tolerance of previous report.
+
+2. Are the class counts correct?
+   Total 19790 rows sum to 19790. CORRECT.
+   GOOD                      : 135
+   MODERATE                  : 422
+   UNHEALTHY_SENSITIVE       : 5875
+   UNHEALTHY                 : 12998
+   VERY_UNHEALTHY            : 0
+   HAZARDOUS                 : 360
+
+3. Does Model C outperform the majority-class baseline?
+   Baseline accuracy (predict 'UNHEALTHY' always): 0.7877 (78.77%)
+   Model C accuracy                            : 0.9054 (90.54%)
+   Improvement: +11.76 percentage points
+   Model C BEATS baseline: YES
+
+4. Is HAZARDOUS detection meaningfully better?
+   Previous pipeline (original 80/20 split): 0/360 HAZARDOUS recalled (0.00%)
+   This model (cutoff 2026-06-01)          : 60/122 HAZARDOUS recalled (49.2%)
+   HAZARDOUS precision: 1.0000 (all HAZARDOUS predictions are correct)
+   Improvement: YES. But 62 of 122 HAZARDOUS samples are still missed.
+
+5. What limitations must be disclosed in the paper?
+   a. VERY_UNHEALTHY has 0 samples; model cannot detect this class.
+   b. HAZARDOUS comes from only 1 training date (2026-05-30, 238 samples).
+   c. Extreme split ratio: 19008/782 (96/4). Test set has only 782 rows.
+   d. GOOD (135), MODERATE (422),
+      UNHEALTHY_SENSITIVE (5875) are minority classes.
+   e. Single-device, single-location data. Generalisation unverified.
+   f. Labels are AQI-derived from the sensor, not EPA-validated measurements.
+   g. 49% HAZARDOUS recall means ~half of dangerous air quality events are missed.
+
+6. Is the model ready for Android export?
+   NO. Blockers remaining:
+   a. TreeNode.Leaf must store DoubleArray votes, not a single classId.
+   b. Existing AirQualityClassifier.kt uses 8 features including AQI;
+      trained model uses 7 features excluding AQI. Incompatible interface.
+   c. 46,000+ tree nodes require automated Kotlin code generation.
+   d. StandardScaler constants (Section 3 above) must be hard-coded in Kotlin.
+   e. NaN guards must be added before model inference.
+
+Done.

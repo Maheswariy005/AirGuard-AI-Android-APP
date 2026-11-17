@@ -65,4 +65,17 @@
     <string name="about_title">About AirGuard AI</string>
     <string name="about_description">A lightweight on-device ML framework for indoor air quality risk classification under connectivity-constrained deployments.\n\nResearch Project — College 2025–2026</string>
     <string name="about_version">Version 1.0</string>
+
+    <!-- Dual classification labels -->
+    <string name="label_aqi_derived">AQI-Derived Category</string>
+    <string name="label_ml_predicted">ML Prediction</string>
+    <string name="label_ml_predicted_detail">Predicted from 7 sensor features (not AQI)</string>
+    <string name="classifications_agree">Classifications agree ✓</string>
+    <string name="classifications_differ">Classifications differ — the two methods may respond differently to current conditions.</string>
+    <string name="ml_loading">Computing ML prediction…</string>
+    <string name="ml_unavailable">ML prediction unavailable</string>
+    <string name="ml_very_unhealthy_note">Note: VERY UNHEALTHY is not supported by the trained model (no training data).</string>
+
+    <!-- Scientific transparency note -->
+    <string name="ml_transparency_note">ⓘ  Model notes:\n• AQI-derived category uses recorded AQI and existing thresholds.\n• ML category is predicted from 7 non-AQI sensor features.\n• Model evaluated on available dataset; not independently validated against reference equipment.\n• HAZARDOUS recall ≈ 49% on the chronological test set.\n• VERY UNHEALTHY class has no training data and cannot be predicted.</string>
 </resources>

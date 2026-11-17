@@ -1,0 +1,17 @@
+ONNX (opset=17, ZipMap=False) saved: c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\audit_model_c_opset17.onnx
+Size: 3.09 MB
+IR version: 8
+Opset: 1
+Outputs:
+  label: tensor(int64)
+  probabilities: tensor(float)
+
+782-sample verification (opset=17, ZipMap=False):
+  Label agreement: 782/782 (100.00%)
+  Max proba diff : 4.17e-07
+  Proba shape    : (782, 5)
+  Label dtype    : int64
+  ONNX class order: [np.str_('GOOD'), np.str_('HAZARDOUS'), np.str_('MODERATE'), np.str_('UNHEALTHY'), np.str_('UNHEALTHY_SENSITIVE')]
+
+Deployed to: c:\Users\ADMIN\AppData\AirGuardAI\app\src\main\assets\airguard_model.onnx (3.09 MB)
+EXPORT_OK

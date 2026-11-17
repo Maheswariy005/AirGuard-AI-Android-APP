@@ -1,0 +1,35 @@
+AirGuard AI Final Reproducibility Audit
+==================================================
+CSV: C:\Users\ADMIN\Downloads\AeroSense Device 2 - Sheet1 (1).csv
+Split cutoff: 2026-06-01
+Random state: 42
+
+Dataset cleaning:
+  Raw rows         : 19896
+  Missing datetime : 104
+  Duplicates       : 2
+  NaN features     : 0
+  Final rows       : 19790
+
+Class counts (19790 rows):
+  GOOD                      : 135
+  MODERATE                  : 422
+  UNHEALTHY_SENSITIVE       : 5875
+  UNHEALTHY                 : 12998
+  VERY_UNHEALTHY            : 0
+  HAZARDOUS                 : 360
+
+Split: train=19008, test=782, overlap=0
+Train HAZ=238, Test HAZ=122
+
+Reproduced Model C metrics:
+  Accuracy        : 0.905371
+  Macro Precision : 0.716486
+  Macro Recall    : 0.711318
+  Macro F1        : 0.696570
+  Weighted F1     : 0.894636
+  HAZ Precision   : 1.000000
+  HAZ Recall      : 0.491803
+  HAZ TP/Total    : 60/122
+
+Confusion matrix saved to: confusion_matrix.csv

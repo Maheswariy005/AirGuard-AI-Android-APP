@@ -1,0 +1,198 @@
+Total usable rows: 19790
+Date range: 2025-07-26 to 2026-08-25
+
+================================================================================
+
+Cutoff: 2026-04-01  (Train 58.1% / Test 41.9%)
+  Train:  11507 rows  2025-07-26 -> 2026-03-25
+  Test :   8283 rows  2026-04-30 -> 2026-08-25
+  Date overlap between sets: 0 dates  [CLEAN]
+  Train class counts:
+    GOOD                      :    114
+    MODERATE                  :    381
+    UNHEALTHY_SENSITIVE       :   5366
+    UNHEALTHY                 :   5646
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :      0 <-- ZERO
+  Test class counts:
+    GOOD                      :     21
+    MODERATE                  :     41
+    UNHEALTHY_SENSITIVE       :    509
+    UNHEALTHY                 :   7352
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :    360
+  HAZARDOUS in train: 0  |  HAZARDOUS in test: 360
+  HAZARDOUS in both (>=30 each): NO
+  VIABLE: NO
+
+Cutoff: 2026-04-15  (Train 58.1% / Test 41.9%)
+  Train:  11507 rows  2025-07-26 -> 2026-03-25
+  Test :   8283 rows  2026-04-30 -> 2026-08-25
+  Date overlap between sets: 0 dates  [CLEAN]
+  Train class counts:
+    GOOD                      :    114
+    MODERATE                  :    381
+    UNHEALTHY_SENSITIVE       :   5366
+    UNHEALTHY                 :   5646
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :      0 <-- ZERO
+  Test class counts:
+    GOOD                      :     21
+    MODERATE                  :     41
+    UNHEALTHY_SENSITIVE       :    509
+    UNHEALTHY                 :   7352
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :    360
+  HAZARDOUS in train: 0  |  HAZARDOUS in test: 360
+  HAZARDOUS in both (>=30 each): NO
+  VIABLE: NO
+
+Cutoff: 2026-05-01  (Train 64.5% / Test 35.5%)
+  Train:  12772 rows  2025-07-26 -> 2026-04-30
+  Test :   7018 rows  2026-05-01 -> 2026-08-25
+  Date overlap between sets: 0 dates  [CLEAN]
+  Train class counts:
+    GOOD                      :    125
+    MODERATE                  :    406
+    UNHEALTHY_SENSITIVE       :   5833
+    UNHEALTHY                 :   6408
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :      0 <-- ZERO
+  Test class counts:
+    GOOD                      :     10
+    MODERATE                  :     16
+    UNHEALTHY_SENSITIVE       :     42
+    UNHEALTHY                 :   6590
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :    360
+  HAZARDOUS in train: 0  |  HAZARDOUS in test: 360
+  HAZARDOUS in both (>=30 each): NO
+  VIABLE: NO
+
+Cutoff: 2026-05-15  (Train 91.7% / Test 8.3%)
+  Train:  18150 rows  2025-07-26 -> 2026-05-01
+  Test :   1640 rows  2026-05-30 -> 2026-08-25
+  Date overlap between sets: 0 dates  [CLEAN]
+  Train class counts:
+    GOOD                      :    125
+    MODERATE                  :    406
+    UNHEALTHY_SENSITIVE       :   5833
+    UNHEALTHY                 :  11786
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :      0 <-- ZERO
+  Test class counts:
+    GOOD                      :     10
+    MODERATE                  :     16
+    UNHEALTHY_SENSITIVE       :     42
+    UNHEALTHY                 :   1212
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :    360
+  HAZARDOUS in train: 0  |  HAZARDOUS in test: 360
+  HAZARDOUS in both (>=30 each): NO
+  VIABLE: NO
+
+Cutoff: 2026-05-29  (Train 91.7% / Test 8.3%)
+  Train:  18150 rows  2025-07-26 -> 2026-05-01
+  Test :   1640 rows  2026-05-30 -> 2026-08-25
+  Date overlap between sets: 0 dates  [CLEAN]
+  Train class counts:
+    GOOD                      :    125
+    MODERATE                  :    406
+    UNHEALTHY_SENSITIVE       :   5833
+    UNHEALTHY                 :  11786
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :      0 <-- ZERO
+  Test class counts:
+    GOOD                      :     10
+    MODERATE                  :     16
+    UNHEALTHY_SENSITIVE       :     42
+    UNHEALTHY                 :   1212
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :    360
+  HAZARDOUS in train: 0  |  HAZARDOUS in test: 360
+  HAZARDOUS in both (>=30 each): NO
+  VIABLE: NO
+
+Cutoff: 2026-06-01  (Train 96.0% / Test 4.0%)
+  Train:  19008 rows  2025-07-26 -> 2026-05-31
+  Test :    782 rows  2026-06-01 -> 2026-08-25
+  Date overlap between sets: 0 dates  [CLEAN]
+  Train class counts:
+    GOOD                      :    127
+    MODERATE                  :    411
+    UNHEALTHY_SENSITIVE       :   5850
+    UNHEALTHY                 :  12382
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :    238
+  Test class counts:
+    GOOD                      :      8
+    MODERATE                  :     11
+    UNHEALTHY_SENSITIVE       :     25
+    UNHEALTHY                 :    616
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :    122
+  HAZARDOUS in train: 238  |  HAZARDOUS in test: 122
+  HAZARDOUS in both (>=30 each): YES
+  VIABLE: YES
+
+Cutoff: 2026-07-01  (Train 96.8% / Test 3.2%)
+  Train:  19161 rows  2025-07-26 -> 2026-06-01
+  Test :    629 rows  2026-07-14 -> 2026-08-25
+  Date overlap between sets: 0 dates  [CLEAN]
+  Train class counts:
+    GOOD                      :    128
+    MODERATE                  :    413
+    UNHEALTHY_SENSITIVE       :   5854
+    UNHEALTHY                 :  12528
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :    238
+  Test class counts:
+    GOOD                      :      7
+    MODERATE                  :      9
+    UNHEALTHY_SENSITIVE       :     21
+    UNHEALTHY                 :    470
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :    122
+  HAZARDOUS in train: 238  |  HAZARDOUS in test: 122
+  HAZARDOUS in both (>=30 each): YES
+  VIABLE: YES
+
+Cutoff: 2026-07-14  (Train 96.8% / Test 3.2%)
+  Train:  19161 rows  2025-07-26 -> 2026-06-01
+  Test :    629 rows  2026-07-14 -> 2026-08-25
+  Date overlap between sets: 0 dates  [CLEAN]
+  Train class counts:
+    GOOD                      :    128
+    MODERATE                  :    413
+    UNHEALTHY_SENSITIVE       :   5854
+    UNHEALTHY                 :  12528
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :    238
+  Test class counts:
+    GOOD                      :      7
+    MODERATE                  :      9
+    UNHEALTHY_SENSITIVE       :     21
+    UNHEALTHY                 :    470
+    VERY_UNHEALTHY            :      0 <-- ZERO
+    HAZARDOUS                 :    122
+  HAZARDOUS in train: 238  |  HAZARDOUS in test: 122
+  HAZARDOUS in both (>=30 each): YES
+  VIABLE: YES
+
+================================================================================
+
+SUMMARY TABLE:
+Cutoff           Train    Test   TrHAZ   TeHAZ  HAZboth  Viable
+----------------------------------------------------------
+2026-04-01       11507    8283       0     360       NO      NO
+2026-04-15       11507    8283       0     360       NO      NO
+2026-05-01       12772    7018       0     360       NO      NO
+2026-05-15       18150    1640       0     360       NO      NO
+2026-05-29       18150    1640       0     360       NO      NO
+2026-06-01       19008     782     238     122      YES     YES
+2026-07-01       19161     629     238     122      YES     YES
+2026-07-14       19161     629     238     122      YES     YES
+
+BEST VIABLE CUTOFF: 2026-07-01
+  Train: 19161 rows  Test: 629 rows
+  HAZARDOUS train: 238  test: 122

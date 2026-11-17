@@ -1,0 +1,76 @@
+========================================================================
+1. ORIGINAL MODEL (ml_pipeline/airguard_model.pkl)
+========================================================================
+   n_estimators: 200
+   class_weight: balanced
+   random_state: 42
+   n_classes_: 4
+   Feature importances (order: ['Temperature(°C)', 'Humidity(%)', 'Pressure(hPa)', 'Gas (kOhms)', 'Altitude(m)', 'DewPoint(°C)', 'HeatIndex(°C)']):
+     Temperature(°C)           : 0.079301162487686  (7.9301%)
+     Humidity(%)               : 0.078561015000535  (7.8561%)
+     Pressure(hPa)             : 0.053452320419684  (5.3452%)
+     Gas (kOhms)               : 0.627995980800107  (62.7996%)
+     Altitude(m)               : 0.061944031237666  (6.1944%)
+     DewPoint(°C)              : 0.053311994194852  (5.3312%)
+     HeatIndex(°C)             : 0.045433495859470  (4.5433%)
+   Sum: 1.000000000000000
+
+========================================================================
+2. BEST MODEL (experiments/best_model.pkl)
+========================================================================
+   n_estimators: 200
+   class_weight: balanced
+   random_state: 42
+   n_classes_: 5
+   Feature importances (order: ['Temperature(°C)', 'Humidity(%)', 'Pressure(hPa)', 'Gas (kOhms)', 'Altitude(m)', 'DewPoint(°C)', 'HeatIndex(°C)']):
+     Temperature(°C)           : 0.065122587801073  (6.5123%)
+     Humidity(%)               : 0.124537950376931  (12.4538%)
+     Pressure(hPa)             : 0.071816121292374  (7.1816%)
+     Gas (kOhms)               : 0.541908394958970  (54.1908%)
+     Altitude(m)               : 0.085348968351321  (8.5349%)
+     DewPoint(°C)              : 0.056729735501988  (5.6730%)
+     HeatIndex(°C)             : 0.054536241717343  (5.4536%)
+   Sum: 1.000000000000000
+
+========================================================================
+3. AUDIT MODEL (experiments/final_audit/audit_model_c.pkl)
+========================================================================
+   n_estimators: 200
+   class_weight: balanced
+   random_state: 42
+   n_classes_: 5
+   Feature importances (order: ['Temperature(°C)', 'Humidity(%)', 'Pressure(hPa)', 'Gas (kOhms)', 'Altitude(m)', 'DewPoint(°C)', 'HeatIndex(°C)']):
+     Temperature(°C)           : 0.065122587801073  (6.5123%)
+     Humidity(%)               : 0.124537950376931  (12.4538%)
+     Pressure(hPa)             : 0.071816121292374  (7.1816%)
+     Gas (kOhms)               : 0.541908394958970  (54.1908%)
+     Altitude(m)               : 0.085348968351321  (8.5349%)
+     DewPoint(°C)              : 0.056729735501988  (5.6730%)
+     HeatIndex(°C)             : 0.054536241717343  (5.4536%)
+   Sum: 1.000000000000000
+
+========================================================================
+4. MD5 COMPARISON (model identity check)
+========================================================================
+   best_model.pkl           : 7c877bd85e1fd288...  5.39 MB
+   audit_model_c.pkl        : 7c877bd85e1fd288...  5.39 MB
+   ONNX (pipeline)          : 97f585a761a7a16d...  3.09 MB
+   ONNX (assets)            : 97f585a761a7a16d...  3.09 MB
+
+========================================================================
+5. BEST vs AUDIT MODEL IDENTITY
+========================================================================
+   Feature importances identical: True
+   Max diff: 0.00e+00
+
+========================================================================
+6. ORIGINAL vs BEST/AUDIT (different splits → different models)
+========================================================================
+   Original Gas importance: 0.627996
+   Best/Audit Gas importance: 0.541908
+   Original Humidity importance: 0.078561
+   Best/Audit Humidity importance: 0.124538
+   Max diff (original vs best): 0.086088
+   These differ because they are DIFFERENT MODELS from DIFFERENT SPLITS:
+     Original: 80/20 row-index split (cutoff ~2026-05-01, mid-day)
+     Best/Audit: 2026-06-01 calendar-day split (includes HAZARDOUS in training)

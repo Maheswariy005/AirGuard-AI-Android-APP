@@ -6,6 +6,8 @@ import com.airguard.ai.data.RiskLevel
 import com.airguard.ai.data.SensorReading
 import com.airguard.ai.data.SensorRepository
 import com.airguard.ai.ml.AirQualityClassifier
+import com.airguard.ai.ml.MlPredictionResult
+import com.airguard.ai.ml.OnnxClassifier
 import com.airguard.ai.ml.PredictionResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,9 +17,14 @@ class AnalysisViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo = SensorRepository(app)
     private val classifier = AirQualityClassifier()
+    private val onnxClassifier = OnnxClassifier(app)
 
     private val _latestPrediction = MutableLiveData<PredictionResult?>()
     val latestPrediction: LiveData<PredictionResult?> = _latestPrediction
+
+    /** ML prediction (7 sensor features, AQI excluded from model input). */
+    private val _latestMlPrediction = MutableLiveData<MlPredictionResult?>()
+    val latestMlPrediction: LiveData<MlPredictionResult?> = _latestMlPrediction
 
     private val _aqiDistribution = MutableLiveData<Map<RiskLevel, Int>?>()
     val aqiDistribution: LiveData<Map<RiskLevel, Int>?> = _aqiDistribution
@@ -38,11 +45,15 @@ class AnalysisViewModel(app: Application) : AndroidViewModel(app) {
 
             if (readings.isEmpty()) return@launch
 
-            // Latest prediction
+            // Latest prediction (AQI-based legacy)
             val latest = readings.first()
             _latestPrediction.value = withContext(Dispatchers.Default) {
                 classifier.predict(latest)
             }
+            // ML prediction (7 sensor features, AQI excluded)
+            _latestMlPrediction.value = runCatching {
+                withContext(Dispatchers.Default) { onnxClassifier.predict(latest) }
+            }.getOrNull()
 
             // AQI distribution
             val dist = withContext(Dispatchers.Default) {
@@ -79,4 +90,9 @@ class AnalysisViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun refresh() = loadAnalysis()
+
+    override fun onCleared() {
+        super.onCleared()
+        onnxClassifier.close()
+    }
 }

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "c:\Users\ADMIN\AppData\AirGuardAI\ml_pipeline\experiments\final_audit\investigate_proba_diff.py", line 222, in <module>
+    tv_proba = vec['probabilities'].get(cls_name, 0.0)
+               ~~~^^^^^^^^^^^^^^^^^
+KeyError: 'probabilities'

@@ -1,0 +1,17 @@
+AirGuard AI — Corrected Classification Report
+Canonical class order: ['GOOD', 'MODERATE', 'UNHEALTHY_SENSITIVE', 'UNHEALTHY', 'VERY_UNHEALTHY', 'HAZARDOUS']
+Model: RF class_weight=balanced, random_state=42
+Split cutoff: 2026-06-01, Test rows: 782
+
+                     precision    recall  f1-score   support
+
+               GOOD   0.888889  1.000000  0.941176         8
+           MODERATE   0.769231  0.909091  0.833333        11
+UNHEALTHY_SENSITIVE   0.733333  0.880000  0.800000        25
+          UNHEALTHY   0.907463  0.987013  0.945568       616
+     VERY_UNHEALTHY   0.000000  0.000000  0.000000         0
+          HAZARDOUS   1.000000  0.491803  0.659341       122
+
+           accuracy                       0.905371       782
+          macro avg   0.716486  0.711318  0.696570       782
+       weighted avg   0.914198  0.905371  0.894636       782

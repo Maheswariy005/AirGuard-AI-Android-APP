@@ -1,0 +1,98 @@
+{
+  "audit_date": "2026-11-14",
+  "csv_path": "C:\\Users\\ADMIN\\Downloads\\AeroSense Device 2 - Sheet1 (1).csv",
+  "split_cutoff": "2026-06-01",
+  "features": [
+    "Temperature(\u00b0C)",
+    "Humidity(%)",
+    "Pressure(hPa)",
+    "Gas (kOhms)",
+    "Altitude(m)",
+    "DewPoint(\u00b0C)",
+    "HeatIndex(\u00b0C)"
+  ],
+  "aqi_col": "AQI",
+  "label_thresholds": {
+    "GOOD": "AQI <= 20",
+    "MODERATE": "20 < AQI <= 40",
+    "UNHEALTHY_SENSITIVE": "40 < AQI <= 60",
+    "UNHEALTHY": "60 < AQI <= 80",
+    "VERY_UNHEALTHY": "80 < AQI <= 90",
+    "HAZARDOUS": "AQI > 90"
+  },
+  "rf_params": {
+    "n_estimators": "200",
+    "max_depth": "None",
+    "min_samples_split": "5",
+    "min_samples_leaf": "2",
+    "max_features": "sqrt",
+    "class_weight": "balanced",
+    "random_state": "42",
+    "n_jobs": "-1"
+  },
+  "random_state": 42,
+  "dataset": {
+    "raw_rows": 19896,
+    "missing_datetime_rows": 104,
+    "duplicate_rows_removed": 2,
+    "nan_feature_rows_removed": 0,
+    "final_valid_rows": 19790
+  },
+  "class_counts_total": {
+    "GOOD": 135,
+    "MODERATE": 422,
+    "UNHEALTHY_SENSITIVE": 5875,
+    "UNHEALTHY": 12998,
+    "VERY_UNHEALTHY": 0,
+    "HAZARDOUS": 360
+  },
+  "split": {
+    "train_rows": 19008,
+    "test_rows": 782,
+    "train_date_min": "2025-07-26",
+    "train_date_max": "2026-05-31",
+    "test_date_min": "2026-06-01",
+    "test_date_max": "2026-08-25",
+    "date_overlap": 0
+  },
+  "reproduced_metrics": {
+    "accuracy": 0.905371,
+    "macro_precision": 0.716486,
+    "macro_recall": 0.711318,
+    "macro_f1": 0.69657,
+    "weighted_f1": 0.894636,
+    "hazardous_precision": 1.0,
+    "hazardous_recall": 0.491803,
+    "hazardous_support": 122,
+    "hazardous_tp": 60,
+    "hazardous_fp": 0,
+    "hazardous_fn": 62
+  },
+  "scaler_means": {
+    "Temperature(\u00b0C)": 32.4042561,
+    "Humidity(%)": 65.03094487,
+    "Pressure(hPa)": 1002.64091435,
+    "Gas (kOhms)": 253.99559659,
+    "Altitude(m)": 88.79958965,
+    "DewPoint(\u00b0C)": 25.38847327,
+    "HeatIndex(\u00b0C)": 39.36000105
+  },
+  "scaler_scales": {
+    "Temperature(\u00b0C)": 4.20542132,
+    "Humidity(%)": 7.39775017,
+    "Pressure(hPa)": 5.99102545,
+    "Gas (kOhms)": 89.545656,
+    "Altitude(m)": 50.33614874,
+    "DewPoint(\u00b0C)": 4.75820964,
+    "HeatIndex(\u00b0C)": 7.73907547
+  },
+  "very_unhealthy_samples": 0,
+  "aqi_unique_values": [
+    10.0,
+    20.0,
+    40.0,
+    60.0,
+    80.0,
+    100.0
+  ]
+}
